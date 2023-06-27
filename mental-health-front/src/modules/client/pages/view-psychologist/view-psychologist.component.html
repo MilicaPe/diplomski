@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-6">
+    <div *ngFor="let p of psychologists">
+      <mat-card class="psycholgist">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-9">
+              {{p.name}} {{p.surname}}
+              <img class="gender" src="assets/client/femenine.png" *ngIf="p.gender == 'FEMALE'" alt="">
+              <img class="gender" src="assets/client/mars.png" *ngIf="p.gender == 'MALE'" alt="">
+            </div>
+            <div class="col-3">
+              <button (click)="removePsychologist(p.id)" mat-raised-button>Skloni</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              {{p.email}}
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="col-6">
+    <img src="assets/client/happy-mind-happy-life.png" alt="">
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<kmodule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://jboss.org/kie/6.0.0/kmodule">
+ <kbase name="emotion" eventProcessingMode="stream" packages="emotions">
+        <ksession name="emotionKsession"/>
+    </kbase>
+    
+    <kbase name="diagnostics" eventProcessingMode="stream" packages="diagnostics">
+        <ksession name="diagnosticsKsession" clockType="pseudo"/>
+    </kbase>
+
+
+    <kbase name="template-simple-KBase" packages="template">
+        <ksession name="templateSimpleKsession"/>
+    </kbase>
+</kmodule>

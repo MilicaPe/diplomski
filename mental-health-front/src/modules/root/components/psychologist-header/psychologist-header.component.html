@@ -1,0 +1,26 @@
+<div class="row header">
+
+  <div class="col-6">
+    <a>
+      <img class="logo" src="assets/mental-health.png" alt="Mentally" align="left"
+           pTooltip="Home" tooltipPosition="bottom"/>
+    </a>
+    <h1> {{pageTitle}}</h1>
+  </div>
+  <div class="col-6 d-flex justify-content-end">
+    <nav>
+      <span>
+          <a [routerLink]="['psychologist/report']">
+            <img class="img" src="assets/psychologist/report.png" alt="Izveštaji"
+                 pTooltip="Izveštaji" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a (click)="logout()">
+            <img class="img" src="assets/logout.png" alt="Izlogujte se"
+                 pTooltip="Izlogujte se" tooltipPosition="left"/>
+          </a>
+      </span>
+    </nav>
+  </div>
+</div>

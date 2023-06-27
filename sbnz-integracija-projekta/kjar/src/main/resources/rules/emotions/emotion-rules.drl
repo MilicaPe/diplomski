@@ -1,0 +1,173 @@
+//package emotions;
+//dialect  "mvel"
+
+import com.ftn.sbnz.model.User;
+import com.ftn.sbnz.model.Answer;
+import com.ftn.sbnz.model.Question;
+import com.ftn.sbnz.model.dto.EmotionDetection;
+import com.ftn.sbnz.model.QuestionLayer;
+import com.ftn.sbnz.model.Intensity
+import java.time.LocalDateTime;
+
+rule "transform-answer-emotions"
+no-loop
+agenda-group "transform"
+salience 10
+    when
+        $a: Answer($q: question, $sc: score)
+//        Boolean(!$q.positive)
+        Boolean(booleanValue == false) from $q.positive
+    then
+        //System.out.println("Panic negative answer");
+        //System.out.println($sc);
+        modify($a){setScore(5-$sc);}//-!sc
+end
+
+
+//rule "detect emotion"
+//    when
+//        $e: EmotionDetection($dt: detectionType)
+//    then
+//
+////        System.out.println("Detektovana emocija");
+////        System.out.println($dt);
+//    end
+
+
+rule "get-emotions"
+agenda-group "first-conclusion"
+no-loop
+    when
+
+        $u: User($uId: id)
+        $e1: EmotionDetection(
+            $u == user,
+            $type : detectionType,
+            questionLayer == QuestionLayer.FIRST,
+            (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO)
+        )
+        $e2: EmotionDetection(
+            user == $u,
+            detectionType == $type,
+            QuestionLayer.SECOND == questionLayer,
+            (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO
+            || intensity == Intensity.IZRAZENO),
+            $in : intensity
+        )
+    then
+        EmotionDetection em =new EmotionDetection($in, $u, QuestionLayer.THIRD, $type, LocalDateTime.now());
+        insert(em);
+        delete($e1);
+        delete($e2);
+        System.out.println("Detected: " + $type);
+end
+
+rule "get-emotions x"
+agenda-group "first-conclusion"
+no-loop
+    when
+
+        $u: User($uId: id)
+        $e1: EmotionDetection(
+            $u == user,
+            $type : detectionType,
+            questionLayer == QuestionLayer.FIRST,
+            (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO)
+        )
+        $e2: EmotionDetection(
+            user == $u,
+            detectionType == $type,
+            QuestionLayer.SECOND == questionLayer,
+            (intensity != Intensity.TESKO && intensity != Intensity.DUBOKO
+            && intensity != Intensity.IZRAZENO),
+            $in : intensity
+        )
+    then
+        EmotionDetection em =new EmotionDetection($in, $u, QuestionLayer.THIRD, $type, LocalDateTime.now());
+        insert(em);
+        delete($e1);
+        delete($e2);
+end
+
+rule "get-emotions d"
+agenda-group "first-conclusion"
+no-loop
+    when
+
+        $u: User($uId: id)
+        $e1: EmotionDetection(
+            $u == user,
+            $type : detectionType,
+            questionLayer == QuestionLayer.FIRST,
+            (intensity != Intensity.TESKO && intensity != Intensity.DUBOKO)
+        )
+        $e2: EmotionDetection(
+            user == $u,
+            detectionType == $type,
+            QuestionLayer.SECOND == questionLayer,
+            (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO
+            || intensity == Intensity.IZRAZENO),
+            $in : intensity
+        )
+    then
+        EmotionDetection em =new EmotionDetection($in, $u, QuestionLayer.THIRD, $type, LocalDateTime.now());
+        insert(em);
+        delete($e1);
+        delete($e2);
+end
+
+
+rule "delete not important objects - first"
+agenda-group "first-conclusion"
+no-loop
+    when
+        $u: User($uId: id)
+        $e1: EmotionDetection(
+            $u == user,
+            questionLayer == QuestionLayer.FIRST,
+            (intensity == Intensity.BLAGO || intensity == Intensity.UMERENO ||
+            intensity == Intensity.IZRAZENO)
+        )
+    then
+        delete($e1);
+end
+
+
+rule "delete not important objects - second"
+agenda-group "first-conclusion"
+no-loop
+    when
+        $u: User($uId: id)
+        $e1: EmotionDetection(
+            $u == user,
+            questionLayer == QuestionLayer.SECOND,
+            (intensity == Intensity.BLAGO || intensity == Intensity.UMERENO)
+        )
+    then
+        delete($e1);
+end
+/*
+
+rule "get-emotions"
+agenda-group "first-conclusion"
+no-loop
+    when
+        $e1: EmotionDetection(
+            $u: user,
+            $type : detectionType,
+            questionLayer == QuestionLayer.FIRST,
+            (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO)
+        )
+        $e2: EmotionDetection(
+            user == $u,
+            detectionType == $type,
+            QuestionLayer.SECOND == questionLayer,
+            (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO
+            || intensity == Intensity.IZRAZENO),
+            $in : intensity
+        )
+    then
+        EmotionDetection em =new EmotionDetection($in, $u, QuestionLayer.THIRD, $type);
+        insert(em);
+        System.out.println("Detected: " + $type);
+end*/

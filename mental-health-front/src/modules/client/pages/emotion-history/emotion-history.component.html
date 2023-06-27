@@ -1,0 +1,34 @@
+<div class="row contain">
+  <div class="col-5">
+    <img src="assets/client/benefits.png" alt="X"/>
+  </div>
+  <div class="col-7 table-container">
+    <p-table class="table" [value]="historyList" [lazy]="true"
+             (onLazyLoad)="nextPage($event)" [loading]="loading" [totalRecords]="totalRecords"
+             [paginator]="true" [rows]="rowCount" [showCurrentPageReport]="true" #table
+             [currentPageReportTemplate]="'{currentPage} od {totalPages}'" [rowsPerPageOptions]="[1,2,5]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Datum</th>
+          <th>Dobijeno</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-survey><!-- (click)="openDialog(client)"-->
+        <tr
+          (click)="openDialog(survey)">
+          <td>{{survey.time | dateArrayToString}}</td>
+          <td>
+            <img class="emotion" src="assets/client/emotions/sad-1.png" *ngIf="survey.detectionType == 'SAD'" alt="">
+            <img class="emotion" src="assets/client/emotions/disgusted-1.png" *ngIf="survey.detectionType == 'DISGUSTED'" alt="">
+            <img class="emotion" src="assets/client/emotions/angry-1.png" *ngIf="survey.detectionType == 'ANGRY'" alt="">
+            <img class="emotion" src="assets/client/emotions/fearful-1.png" *ngIf="survey.detectionType == 'FEARFUL'" alt="">
+            <img class="emotion" src="assets/client/emotions/bad-1.png" *ngIf="survey.detectionType == 'BAD'" alt="">
+            <img class="emotion" src="assets/client/emotions/surprised-1.png" *ngIf="survey.detectionType == 'SURPRISED'" alt="">
+            <img class="emotion" src="assets/client/emotions/happy-1.png" *ngIf="survey.detectionType == 'HAPPY'" alt="">
+            {{survey.detectionType | emotionTypeToString | detectionTypeToString}}
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

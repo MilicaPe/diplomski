@@ -1,0 +1,33 @@
+<div id="search">
+  <input type="text" [(ngModel)]="searchParam">
+  <button (click)="findPsychologist()" mat-button color="primary">Traži</button>
+</div>
+
+<div class="row">
+  <div class="col-7">
+    <div *ngFor="let p of psychologists">
+      <mat-card class="psycholgist">
+        <mat-card-content>
+          <div class="row">
+            <div class="col-9">
+              {{p.name}} {{p.surname}}
+              <img class="gender" src="assets/client/femenine.png" *ngIf="p.gender == 'FEMALE'" alt="">
+              <img class="gender" src="assets/client/mars.png" *ngIf="p.gender == 'MALE'" alt="">
+            </div>
+            <div class="col-3">
+              <button (click)="addPsychologist(p.id)" mat-raised-button> Dodaj</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4">
+              {{p.email}}
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="col-5">
+    <img src="assets/client/seeking-help.png" alt="">
+  </div>
+</div>

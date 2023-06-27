@@ -1,0 +1,76 @@
+<mat-stepper [linear]="isLinear" #stepper class="stepper">
+
+  <!-- <mat-step [completed]="completed()"> -->
+  <mat-step [completed]="isCompleted">
+    <div class="step">
+      <app-question-step  class="stepper-elem" [questions]="q[0]" [answers]="answers[0]"></app-question-step>
+    </div>
+
+    <div class="mt-5 buttons">
+      <button class="mx-2" mat-stroked-button color="primary" matStepperPrevious>Nazad</button>
+      <button mat-stroked-button color="primary" matStepperNext>Dalje</button>
+    </div>
+  </mat-step>
+  <mat-step [completed]="isCompleted">
+    <div class="step">
+      <app-question-step [questions]="q[1]" [answers]="answers[1]"></app-question-step>
+    </div>
+
+    <div class="mt-5 buttons">
+      <button class="mx-2" mat-stroked-button color="primary" matStepperPrevious>Nazad</button>
+      <button mat-stroked-button color="primary" matStepperNext>Dalje</button>
+    </div>
+  </mat-step>
+  <mat-step [completed]="isCompleted">
+    <div class="step">
+      <app-question-step [questions]="q[2]" [answers]="answers[2]"></app-question-step>
+    </div>
+
+    <div class="mt-5 buttons">
+      <button class="mx-2" mat-stroked-button color="primary" matStepperPrevious>Nazad</button>
+      <button mat-stroked-button color="primary" matStepperNext>Dalje</button>
+    </div>
+  </mat-step>
+  <mat-step [completed]="isCompleted">
+    <div class="step">
+      <app-question-step [questions]="q[3]" [answers]="answers[3]"></app-question-step>
+    </div>
+
+    <div class="mt-5 buttons">
+      <button class="mx-2" mat-stroked-button color="primary" matStepperPrevious>Nazad</button>
+      <button mat-stroked-button color="primary" matStepperNext>Dalje</button>
+    </div>
+  </mat-step>
+  <mat-step [completed]="isCompleted">
+    <div class="step">
+      <app-question-step [questions]="q[4]" [answers]="answers[4]"></app-question-step>
+    </div>
+
+    <div class="mt-5 buttons">
+      <button class="mx-2" mat-stroked-button color="primary" matStepperPrevious>Nazad</button>
+      <button mat-stroked-button color="primary" matStepperNext>Dalje</button>
+    </div>
+  </mat-step>
+  <mat-step [completed]="isCompleted">
+    <div class="step">
+      <app-question-step [questions]="q[5]" [answers]="answers[5]"></app-question-step>
+    </div>
+
+    <div class="mt-5 buttons">
+      <button class="mx-2" mat-stroked-button color="primary" matStepperPrevious>Nazad</button>
+      <button mat-stroked-button color="primary" matStepperNext>Dalje</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <div class="step">
+      <ng-template matStepLabel>Gotov</ng-template>
+      <p>Završili ste popunjavanje forme.</p>
+      <div class="my-5">
+        <button class="mx-2" mat-stroked-button color="primary" matStepperPrevious>Nazad</button>
+        <button mat-raised-button color="primary" (click)="submitRequest()">Pošalji</button>
+      </div>
+    </div>
+  </mat-step>
+</mat-stepper>
+
+<p-toast position="top-right" key="request-message"></p-toast>

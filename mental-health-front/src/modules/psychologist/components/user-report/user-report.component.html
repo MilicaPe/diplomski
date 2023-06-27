@@ -1,0 +1,55 @@
+<div class="row" style="margin: 5px">
+  <div class="col-4">
+  </div>
+  <div class="col-2">
+    <mat-form-field>
+      <mat-label>Odaberite klijenta</mat-label>
+      <mat-select [(ngModel)]="selectedUserId" name="food">
+        <mat-option *ngFor="let client of clients" [value]="client.id">
+          {{client.name}} {{client.surname}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-2">
+    <button mat-raised-button color="primary" (click)="getReportForUser(0, rowCount)">Prikaži</button>
+  </div>
+</div>
+
+
+<div >
+
+  <p-table class="table" [value]="historyList" [lazy]="true"
+           (onLazyLoad)="nextPage($event)" [loading]="loading" [totalRecords]="totalRecords"
+           [paginator]="true" [rows]="rowCount" [showCurrentPageReport]="true" #table
+           [currentPageReportTemplate]="'{currentPage} od {totalPages}'" [rowsPerPageOptions]="[1,2,5]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Datum</th>
+        <th>Dobijeno</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-survey><!-- (click)="openDialog(client)"-->
+      <tr (click)="openDialog(survey)" >
+        <td>{{survey.time | dateArrayToString}}</td>
+        <td>
+     <!--     <img class="emotion" src="assets/client/emotions/sad-1.png" *ngIf="survey.detectionType == 'SAD'" alt="">
+          <img class="emotion" src="assets/client/emotions/disgusted-1.png" *ngIf="survey.detectionType == 'DISGUSTED'"
+               alt="">
+          <img class="emotion" src="assets/client/emotions/angry-1.png" *ngIf="survey.detectionType == 'ANGRY'" alt="">
+          <img class="emotion" src="assets/client/emotions/fearful-1.png" *ngIf="survey.detectionType == 'FEARFUL'"
+               alt="">
+          <img class="emotion" src="assets/client/emotions/bad-1.png" *ngIf="survey.detectionType == 'BAD'" alt="">
+          <img class="emotion" src="assets/client/emotions/surprised-1.png" *ngIf="survey.detectionType == 'SURPRISED'"
+               alt="">
+          <img class="emotion" src="assets/client/emotions/happy-1.png" *ngIf="survey.detectionType == 'HAPPY'" alt="">
+          -->
+          {{survey.detectionType | detectionTypeToString}}
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<p-toast position="top-right" key="vimm-report-user"></p-toast>
+

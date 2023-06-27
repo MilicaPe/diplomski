@@ -1,0 +1,12 @@
+<div *ngFor="let question of questions" class="question">
+  <p>{{question.text}}</p>
+
+  <mat-radio-group (change)="optionChanged($event, question.id)" aria-label="Select an option">
+    <mat-radio-button value="1" [checked]="true">1</mat-radio-button>
+    <mat-radio-button value="2">2</mat-radio-button>
+    <mat-radio-button value="3">3</mat-radio-button>
+    <mat-radio-button value="4">4</mat-radio-button>
+    <mat-radio-button value="5">5</mat-radio-button>
+  </mat-radio-group>
+  <hr>
+</div>

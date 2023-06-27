@@ -1,0 +1,43 @@
+template header
+type
+layer
+intensity
+min
+max
+finalResult
+text
+
+package diagnostics;
+
+import com.ftn.sbnz.model.QuestionLayer;
+import com.ftn.sbnz.model.DetectionType;
+import com.ftn.sbnz.model.Question;
+import com.ftn.sbnz.model.Intensity;
+import com.ftn.sbnz.model.User;
+import com.ftn.sbnz.model.helper.FullAnswer;
+import com.ftn.sbnz.model.helper.Diagnostic;
+
+template "templ-1"
+rule "Diagnostic_@{row.rowNumber}"
+agenda-group "first-diagnostic"
+salience 90
+
+when
+    $u: User($uId: id)
+    $total: Number() from accumulate(
+        $a1: FullAnswer(
+            user.id==$uId,
+            question.detectionType == DetectionType.@{type},
+            question.questionLayer == QuestionLayer.@{layer},
+            $s: score
+            ),
+            sum($s)
+        )
+     eval($total.intValue() >= @{min} && $total.intValue() <= @{max})
+
+then
+    System.out.println("Okinulo se pravilo i score je: " + $total);
+    insert(new Diagnostic($uId, Intensity.@{intensity}, DetectionType.@{type}, QuestionLayer.@{layer}, null, "@{text}", @{finalResult}));
+end
+
+end template

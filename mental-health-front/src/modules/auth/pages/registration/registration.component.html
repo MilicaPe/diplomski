@@ -1,0 +1,140 @@
+<div align="center">
+  <mat-card  class="outer register">
+    <mat-card-content>
+      <form class="register-form" [formGroup]="registerFormGroup">
+        <mat-grid-list cols="2" rowHeight="6:1">
+          <mat-grid-tile class="EMAIL"> <!-- CN -->
+            <mat-form-field class="register-form-input" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input type="text" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                     id="email" placeholder="example@email.com">
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email je <strong>potrebno</strong>
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Ispravan format email-a: example@vimm.com
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('minLength') && !emailFormControl.hasError('required')">
+                Minimalna dužina email-a: 10
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile class="GENDER">
+            <mat-form-field appearance="fill">
+              <mat-label>Pol</mat-label>
+              <select id="gender" matNativeControl required>
+                <option value="0">Ženski</option>
+                <option value="1">Muški</option>
+              </select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="IME">
+            <mat-form-field class="register-form-input" appearance="fill">
+              <mat-label>Ime</mat-label>
+              <input type="text" matInput [formControl]="nameFormControl" [errorStateMatcher]="matcher"
+                     id="name" placeholder="Pera">
+              <mat-error *ngIf="nameFormControl.hasError('required')">
+                Ime je <strong>potrebno</strong>
+              </mat-error>
+              <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
+                Mora da počinje sa velikom slovom
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile class="ROLE">
+            <mat-form-field appearance="fill">
+              <mat-label>Tip korisnika</mat-label>
+              <select id="userType" matNativeControl required>
+                <option value="2">Klijent</option>
+                <option value="1">Psiholog</option>
+              </select>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="PREZIME">
+            <mat-form-field class="register-form-input" appearance="fill">
+              <mat-label>Prezime</mat-label>
+              <input type="text" matInput [formControl]="surnameFormControl" [errorStateMatcher]="matcher"
+                     id="surname" placeholder="Perić">
+              <mat-error *ngIf="surnameFormControl.hasError('required')">
+                Prezime je <strong>potrebno</strong>
+              </mat-error>
+              <mat-error *ngIf="surnameFormControl.hasError('pattern') && !surnameFormControl.hasError('required')">
+                Prezime da počinje sa velikom slovom
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile class="JOB">
+            <mat-form-field class="register-form-input" appearance="fill">
+              <mat-label>Zanimanje</mat-label>
+              <input type="text" matInput [formControl]="jobFormControl" [errorStateMatcher]="matcher"
+                     id="city" placeholder="Programer">
+              <mat-error *ngIf="jobFormControl.hasError('required')">
+                Zanimanje je <strong>potrebno</strong>
+              </mat-error>
+              <mat-error *ngIf="jobFormControl.hasError('pattern') && !jobFormControl.hasError('required')">
+                Zanimanje sastoji od slova
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="PASSWORD 1">
+            <mat-form-field [hideRequiredMarker]="false">
+              <input type="password" matInput [formControl]="passwordFormControl" [errorStateMatcher]="matcher" placeholder="Lozinka">
+              <mat-error *ngIf="passwordFormControl.hasError('pattern') && !passwordFormControl.hasError('required')">
+                Bar 12 karaktera: velika i mala slova, cifre i spacijalani znaci
+              </mat-error>
+              <mat-error *ngIf="passwordFormControl.hasError('required')">
+                Lozinka je <strong>obavezna</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="YEAR OF BIRTH">
+            <mat-form-field class="register-form-input" appearance="fill">
+              <mat-label>Godina rođenja</mat-label>
+              <input type="number" matInput [formControl]="yearOfBirthFormControl" [errorStateMatcher]="matcher"
+                     id="yearOfBirth" placeholder="2000">
+              <mat-error *ngIf="yearOfBirthFormControl.hasError('required')">
+                Godina rođenja je <strong>potrebno</strong>
+              </mat-error>
+              <mat-error *ngIf="yearOfBirthFormControl.hasError('pattern') && !yearOfBirthFormControl.hasError('required')">
+                Godina mora da sastoji od brojeva
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile class="PASSWORD 2">
+            <mat-form-field [hideRequiredMarker]="false">
+              <input type="password" matInput [formControl]="passwordAgainFormControl" [errorStateMatcher]="matcher" placeholder="Ponovite lozinku">
+              <mat-error *ngIf="!passwordAgainFormControl.hasError('required') && passwordAgainFormControl.hasError('wrongValue')">
+                Lozinke se ne preklapaju
+              </mat-error>
+              <mat-error *ngIf="passwordAgainFormControl.hasError('required')">
+                Lozinka je <strong>obavezna</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+
+
+          <mat-grid-tile class="EMPTY">
+            <div class="white-font">
+              <p>
+                <button [disabled]="!registerFormGroup.valid" mat-raised-button color="primary" class="send"
+                        (click)="submit()" type="submit">Pošalji zahtev</button>
+                <br>
+                <a id="alreadySignedUp" routerLink="/auth/login">Ulogujte se</a>
+              </p>
+            </div>
+          </mat-grid-tile>
+<!--          <mat-grid-tile colspan="2">-->
+<!--          </mat-grid-tile>-->
+        </mat-grid-list>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<p-toast position="top-right" key="vimm-message"></p-toast>

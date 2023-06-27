@@ -1,0 +1,3 @@
+<app-client-header *ngIf="role === 'KLIJENT'" [pageTitle]="pageTitle" ></app-client-header>
+<app-psychologist-header *ngIf="role === 'PSIHOLOG'" [pageTitle]="pageTitle" ></app-psychologist-header>
+<router-outlet (activate)="checkRole()"></router-outlet>

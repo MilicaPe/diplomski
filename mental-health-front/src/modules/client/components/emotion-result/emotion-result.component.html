@@ -1,0 +1,14 @@
+<div align="center">
+  <h4>Tvoj dobijeni rezultat</h4>
+  <br/>
+  <img src="assets/client/emotions/sad-1.png" *ngIf="result.detectionType == 'SAD'" alt="">
+  <img src="assets/client/emotions/disgusted-1.png" *ngIf="result.detectionType == 'DISGUSTED'" alt="">
+  <img src="assets/client/emotions/angry-1.png" *ngIf="result.detectionType == 'ANGRY'" alt="">
+  <img src="assets/client/emotions/fearful-1.png" *ngIf="result.detectionType == 'FEARFUL'" alt="">
+  <img src="assets/client/emotions/bad-1.png" *ngIf="result.detectionType == 'BAD'" alt="">
+  <img src="assets/client/emotions/surprised-1.png" *ngIf="result.detectionType == 'SURPRISED'" alt="">
+  <img src="assets/client/emotions/happy-1.png" *ngIf="result.detectionType == 'HAPPY'" alt="">
+<p>{{result.detectionType | emotionTypeToString}}</p>
+{{result.time | dateArrayToString}}
+
+</div>

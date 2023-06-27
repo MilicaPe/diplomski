@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-3">
+  </div>
+  <div class="col-6">
+    <div class="row">
+      <h2>Prikazani su rezulteta upita za </h2>
+      <div *ngFor="let diagnostic of resultDto.diagnostics let i =index;">
+        <p>{{i + 1}}. {{getDiagnostic(diagnostic)}}</p>
+        <p style="margin-left: 20px;">{{diagnostic.text}}</p>
+      </div>
+
+      <div class="row">
+        <div class="col-8">
+          <h2 [hidden]="isFinal()">Da li želite da nastavite upitnik?</h2>
+        </div>
+        <div class="col-4">
+          <button mat-stroked-button color="primary" [hidden]="isFinal()" (click)="continueQuestionnaire()">Nastavi upitnik</button>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <br/>
+      <br/>
+      <p [hidden]="!isFinal()" > Upitnik je završen.</p>
+
+      <br/>
+      <br/>
+      <br/>
+      <div>
+        <h2><strong>Napomena: </strong></h2>
+        <h2>
+          Ukoliko osećate potrebu slobodno se možete obratiti stručnom licu.
+        </h2>
+      </div>
+    </div>
+
+
+  </div>
+</div>

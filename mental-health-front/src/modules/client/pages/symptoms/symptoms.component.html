@@ -1,0 +1,27 @@
+
+<div class="row" style="margin: 5px">
+  <div class="col-2">
+  </div>
+  <div class="col-2">
+    <mat-form-field>
+      <mat-label>Odaberite stanje</mat-label>
+      <mat-select [(ngModel)]="this.selected" name="food">
+        <mat-option *ngFor="let symptom of this.symptoms" [value]="symptom.value">
+          {{symptom.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-2">
+    <button mat-raised-button color="primary" (click)="getSymptoms()">Prikaži simptome</button>
+  </div>
+
+  <div class="col-5">
+    <h2>Potrebni simtomi za: {{this.showSelected|symptomToString}}</h2>
+    <div *ngFor="let sy of this.result let i = index">
+      <p>{{i+1}}. {{sy|symptomToString}}</p>
+    </div>
+  </div>
+
+</div>

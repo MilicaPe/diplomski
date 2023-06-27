@@ -1,0 +1,56 @@
+<div class="row header">
+
+  <div class="col-6">
+    <a>
+      <img class="logo" src="assets/mental-health.png" alt="Mentally" align="left"
+           pTooltip="Home" tooltipPosition="bottom"/>
+    </a>
+    <h1> {{pageTitle}}</h1>
+  </div>
+  <div class="col-6 d-flex justify-content-end">
+    <nav>
+      <span>
+          <a [routerLink]="['list']">
+            <img class="img" src="assets/client/divan.png" alt="Lista psihologa"
+                 pTooltip="Lista psihologa" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a [routerLink]="['psychologist']">
+            <img class="img" src="assets/client/addPsychologist.png" alt="Dodaj psihologa"
+                 pTooltip="Dodaj psihologa" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a [routerLink]="['questionnaire']">
+            <img class="img" src="assets/client/loupe.png" alt="Dijagnostika"
+                 pTooltip="Dijagnostika" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a [routerLink]="['emotion']">
+            <img class="img" src="assets/client/emotions.png" alt="Emocija"
+                 pTooltip="Emocija" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a [routerLink]="['emotion/history']">
+            <img class="img" src="assets/client/emotion-history.png" alt="Istorija"
+                 pTooltip="Istorija" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a [routerLink]="['symptom']">
+            <img class="img" src="assets/client/symptom.png" alt="Simptomi"
+                 pTooltip="Simptomi" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a (click)="logout()">
+            <img class="img" src="assets/logout.png" alt="Izlogujte se"
+                 pTooltip="Izlogujte se" tooltipPosition="left"/>
+          </a>
+      </span>
+    </nav>
+  </div>
+</div>
