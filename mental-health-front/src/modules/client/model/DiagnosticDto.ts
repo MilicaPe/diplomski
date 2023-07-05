@@ -5,6 +5,7 @@ export interface DiagnosticDto{
   questionLayer:string;
 
   nextLayer:string;
+  nextDetection:string;
   text:string;
   finalResult:boolean;
 

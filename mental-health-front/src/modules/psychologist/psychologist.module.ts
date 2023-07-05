@@ -19,6 +19,9 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {ChartModule} from "primeng/chart";
 import {ToastModule} from "primeng/toast";
+import { DefineRulesComponent } from './pages/define-rules/define-rules.component';
+import { RuleParamsComponent } from './components/rule-params/rule-params.component';
+import { AddTemplateComponent } from './pages/add-template/add-template.component';
 
 
 
@@ -28,7 +31,10 @@ import {ToastModule} from "primeng/toast";
     PsychologistHomeComponent,
     UserReportComponent,
     ReportBasedOnJobAgeComponent,
-    ReportDetectionTimeComponent
+    ReportDetectionTimeComponent,
+    DefineRulesComponent,
+    RuleParamsComponent,
+    AddTemplateComponent
   ],
     imports: [
         CommonModule,

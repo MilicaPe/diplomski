@@ -37,7 +37,7 @@ when
 
 then
     System.out.println("Okinulo se pravilo i score je: " + $total);
-    insert(new Diagnostic($uId, Intensity.@{intensity}, DetectionType.@{type}, QuestionLayer.@{layer}, null, "@{text}", @{finalResult}));
+    insert(new Diagnostic($uId, Intensity.@{intensity}, DetectionType.@{type}, QuestionLayer.@{layer}, null, null, "@{text}", @{finalResult}));
 end
 
 end template

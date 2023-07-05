@@ -50,7 +50,10 @@ public class User {
     private Timestamp lastPasswordResetDate;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<EmotionResult> emotionResults;
+    private List<Result> results;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<DepressionMarkResult> depressionMarkResultsresults;
 
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

@@ -1,0 +1,55 @@
+<div class="row" align="center">
+  <div class="col-4">
+<!--    <mat-form-field appearance="fill">-->
+<!--      <mat-label>Tip uređaja</mat-label>-->
+<!--      <select id="device" matNativeControl required [(ngModel)]="rule.device"-->
+<!--              (ngModelChange)="emitRule()">-->
+<!--        <option value="0">termometer</option>-->
+<!--        <option value="1">merač CO2</option>-->
+<!--        <option value="2">merac vlažnosti vazduha</option>-->
+<!--      </select>-->
+<!--    </mat-form-field>-->
+
+    <mat-form-field appearance="fill">
+      <mat-label>Pitanja</mat-label>
+      <mat-select required [(ngModel)]="this.rule.questionId" >
+        <mat-option *ngFor="let questiton of questions let i = index" [value]="questiton.id">
+          {{i+1}}. {{questiton.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+
+  </div>
+  <div class="col-2">
+    <mat-form-field appearance="fill">
+      <mat-label>Relacija</mat-label>
+      <mat-select id="rel" matNativeControl required [(ngModel)]="rule.relation"
+              (ngModelChange)="emitRule()">
+        <mat-option value="<=">&lt;</mat-option>
+<!--        <option value="<=">&le;</option>-->
+<!--        <option value=">">&gt;</option>-->
+        <mat-option value=">=">&ge;</mat-option>
+        <mat-option value="==">==</mat-option>
+<!--        <option value="!=">!=</option>-->
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="col-2">
+    <mat-form-field  appearance="fill">
+      <mat-label>Vrednost</mat-label>
+<!--      <input type="number" matInput [(ngModel)]="rule.value" (ngModelChange)="emitRule()"-->
+<!--             id="value" placeholder="" required>-->
+
+      <mat-select id="val" matNativeControl required [(ngModel)]="rule.value"
+              (ngModelChange)="emitRule()">
+        <mat-option value="1">1</mat-option>
+        <mat-option value="2">2</mat-option>
+        <mat-option value="3">3</mat-option>
+        <mat-option value="4">4</mat-option>
+        <mat-option value="5">5</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

@@ -4,17 +4,17 @@ import {QuestionService} from "../../services/question-service/question.service"
 import {PageEvent} from "@angular/material/paginator";
 import {AnswerDto} from "../../model/AnswerDto";
 import {MatRadioChange} from "@angular/material/radio";
-import {AnswerService} from "../../services/answer-service/answer.service";
+import {DiagnosticService} from "../../services/diagnostic-service/diagnostic.service";
 import {ResultDto} from "../../model/ResultDto";
 import {MessageService} from "primeng/api";
 
 @Component({
-  selector: 'app-questions',
-  templateUrl: './questions.component.html',
-  styleUrls: ['./questions.component.scss'],
+  selector: 'app-diagnostic-survey',
+  templateUrl: './diagnostic-survey.component.html',
+  styleUrls: ['./diagnostic-survey.component.scss'],
   providers: [MessageService]
 })
-export class QuestionsComponent implements OnInit {
+export class DiagnosticSurveyComponent implements OnInit {
   questions: QuestionDto[] = []
   questionsLen: number = 0
   currentQuestionsToShow: QuestionDto[] = []
@@ -25,11 +25,11 @@ export class QuestionsComponent implements OnInit {
   questionHidden = false
   resultHidden = true
   nextLayer: string = "FIRST"
-  nextType: string = "ANKSIOZNOST PANICNI_NAPAD SOCIJALNA_ANKSIOZNOST"
+  nextType: string = "USLOVI_ZA_ANKSIOZNOST USLOVI_ZA_PANICNI_NAPAD USLOVI_ZA_SOCIJALNU_ANKSIOZNOST"
 
 
   constructor(private questionService: QuestionService,
-              private answerService: AnswerService,
+              private answerService: DiagnosticService,
               private messageService: MessageService) {
   }
 
@@ -114,7 +114,7 @@ export class QuestionsComponent implements OnInit {
     let type: string = ""
     for (let d of this.resultDto.diagnostics) {
       if (d.finalResult === false) {
-        type = type + d.detectionType + " "
+        type = type + d.nextDetection + " "
         layer = d.nextLayer
       }
     }

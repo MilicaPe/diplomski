@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {Observable} from "rxjs";
 import {PaginationDto} from "../../model/PaginationDto";
+import {QuestionDto} from "../../model/QuestionDto";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,10 @@ export class QuestionService {
 
   getQuestionSet(layer:string, type:string) : Observable<PaginationDto> {
     return this.httpClient.get<PaginationDto>(`${this.path}/${layer}/${type}`);
+  }
+
+  getDepressionQuestionSet() : Observable<QuestionDto[]> {
+    return this.httpClient.get<QuestionDto[]>(`${this.path}/depression`);
   }
 
 }

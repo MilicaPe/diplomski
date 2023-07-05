@@ -10,9 +10,4 @@ import lombok.NoArgsConstructor;
 public class QuestionDTO {
     private long id;
     private String text;
-/*
-    private String questionLayer;
-    private String detectionType;
-    private boolean positive;
-*/
 }

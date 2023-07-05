@@ -17,6 +17,8 @@ public class Diagnostic {
     private QuestionLayer questionLayer;
 
     private QuestionLayer nextLayer;
+    private DetectionType nextDetection;
     private String text;
     private boolean finalResult;
+
 }

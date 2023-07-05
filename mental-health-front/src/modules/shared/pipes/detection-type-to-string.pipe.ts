@@ -36,7 +36,7 @@ export class DetectionTypeToStringPipe implements PipeTransform {
         return 'Panični napad'
       case 'PANICNI_POREMECAJ':
         return 'Panični poremećaj'
-      case 'USLOVI_ZA_SOCIJAlNU_ANKSIOZNOST':
+      case 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST':
         return 'Uslovi za socijalnu anksioznost'
       case 'SOCIJALNA_ANKSIOZNOST':
         return 'Socijalna anksioznost'

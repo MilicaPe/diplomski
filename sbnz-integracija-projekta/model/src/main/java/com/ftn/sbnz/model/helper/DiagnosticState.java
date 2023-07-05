@@ -1,5 +1,6 @@
 package com.ftn.sbnz.model.helper;
 
+import com.ftn.sbnz.model.DetectionType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import org.kie.api.definition.type.Position;
 @NoArgsConstructor
 public class DiagnosticState {
     @Position(0)
-    public SymptomType symptom;
+    public DetectionType symptom;
     @Position(1)
-    public SymptomType diagnosticState;
+    public DetectionType diagnosticState;
 }

@@ -17,4 +17,6 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     List<Question> getQuestionsByDetectionTypeAndQuestionLayer(DetectionType detectionType, QuestionLayer questionLayer);
 
+    @Query("select q from Question q where q.depressionMark = true")
+    List<Question>getQuestionsByPositiveDepressionMark();
 }

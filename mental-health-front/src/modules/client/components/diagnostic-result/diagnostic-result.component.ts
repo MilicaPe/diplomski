@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {ResultDto} from "../../model/ResultDto";
 import {DiagnosticDto} from "../../model/DiagnosticDto";
+import {DiagnosticService} from "../../services/diagnostic-service/diagnostic.service";
+import {DepressionMarkDto} from "../../model/depression-mark-dto";
 
 @Component({
   selector: 'app-diagnostic-result',
@@ -13,30 +15,12 @@ export class DiagnosticResultComponent {
 
   @Output() result = new EventEmitter<ResultDto>();
 
+  depressionMarkRes:DepressionMarkDto[] = []
+  isMark:boolean = true;
 
-  constructor() {
+  constructor(private diagnosticService:DiagnosticService) {
   }
 
-  getDiagnostic(diagnostic:DiagnosticDto):string{
-    if(diagnostic.detectionType==="ANKSIOZNOST" && diagnostic.questionLayer==="FIRST")
-      return "Uslovi za anksioznost"
-    else if(diagnostic.detectionType==="ANKSIOZNOST" && diagnostic.questionLayer==="SECOND")
-      return "Anksioznost"
-    else if(diagnostic.detectionType==="ANKSIOZNOST" && diagnostic.questionLayer==="THIRD")
-      return "Generalni anksiozni poremećaj"
-    else if(diagnostic.detectionType==="PANICNI_NAPAD" && diagnostic.questionLayer==="FIRST")
-      return "Uslovi za panični napad"
-    else if(diagnostic.detectionType==="PANICNI_NAPAD" && diagnostic.questionLayer==="SECOND")
-      return "Panični napad"
-    else if(diagnostic.detectionType==="PANICNI_NAPAD" && diagnostic.questionLayer==="THIRD")
-      return "Panični poremećaj"
-    else if(diagnostic.detectionType==="SOCIJALNA_ANKSIOZNOST" && diagnostic.questionLayer==="FIRST")
-      return "Uslovi za socijalnu anksioznost"
-    else if(diagnostic.detectionType==="SOCIJALNA_ANKSIOZNOST" && diagnostic.questionLayer==="SECOND")
-      return "Socijalna anksioznost"
-    else
-      return "Socijalna fobija"
-  }
 
   isFinal() {
     let final = this.resultDto.diagnostics.filter(diagnostic => diagnostic.finalResult===false).length
@@ -46,4 +30,17 @@ export class DiagnosticResultComponent {
   continueQuestionnaire() {
     this.result.emit(this.resultDto);
   }
+
+  getDepressionMark() {
+    this.diagnosticService.getDepressionMark().subscribe(res=>{
+      this.depressionMarkRes = res;
+      this.isMark = false;
+    })
+
+  }
+
+  isMarkExist(){
+    if(this.depressionMarkRes.length!==0) {return false;}else {return true;}
+  }
+
 }

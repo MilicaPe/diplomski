@@ -2,7 +2,7 @@ import {Routes} from "@angular/router";
 import {RoleGuard} from "../auth/guards/role/role.guard";
 import {EmotionSurveyComponent} from "./pages/emotion-survey/emotion-survey.component";
 import {EmotionHistoryComponent} from "./pages/emotion-history/emotion-history.component";
-import {QuestionsComponent} from "./pages/questions/questions.component";
+import {DiagnosticSurveyComponent} from "./pages/diagnostic-survey/diagnostic-survey.component";
 import {AddPsychologistComponent} from "./pages/add-psychologist/add-psychologist.component";
 import {ViewPsychologistComponent} from "./pages/view-psychologist/view-psychologist.component";
 import {SymptomsComponent} from "./pages/symptoms/symptoms.component";
@@ -12,7 +12,7 @@ export const ClientRoutes: Routes = [
   {
     path: 'questionnaire',
     pathMatch: 'full',
-    component: QuestionsComponent,
+    component: DiagnosticSurveyComponent,
     canActivate: [RoleGuard],
     data: { expectedRoles: 'KLIJENT' }
   },

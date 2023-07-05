@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class EmotionResult {
+public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,7 +25,7 @@ public class EmotionResult {
 
     private LocalDateTime time;
 
-    public EmotionResult(User user, DetectionType detected, LocalDateTime time) {
+    public Result(User user, DetectionType detected, LocalDateTime time) {
         this.user = user;
         this.detected = detected;
         this.time = time;

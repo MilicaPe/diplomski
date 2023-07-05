@@ -5,7 +5,7 @@ import com.ftn.sbnz.model.dto.EmotionDetection;
 import com.ftn.sbnz.service.dto.*;
 import com.ftn.sbnz.service.repository.AnswerRepository;
 import com.ftn.sbnz.service.repository.QuestionRepository;
-import com.ftn.sbnz.service.repository.EmotionResultRepository;
+import com.ftn.sbnz.service.repository.ResultRepository;
 import com.ftn.sbnz.service.repository.UserRepository;
 import org.drools.decisiontable.ExternalSpreadsheetCompiler;
 import org.kie.api.builder.Message;
@@ -46,7 +46,7 @@ public class EmotionService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private EmotionResultRepository emotionResultRepository;
+    private ResultRepository resultRepository;
 
 
     public EmotionResultDTO analyseSurvey(SurveyDTO answers, String loggedInUser) throws IOException {
@@ -54,7 +54,8 @@ public class EmotionService {
         FactHandle userFactHandle = kSession.insert(user);
 
         List<FactHandle> answerList = new ArrayList<>();
-        LocalDateTime time =  LocalDateTime.now();
+
+        LocalDateTime time = LocalDateTime.now();
         for (EmotionAnswerDTO a : answers.getAnswers()){
             Question q1 = questionRepository.findById(a.getQuestionId()).orElse(null);//new Question();
             Answer a1 = new Answer(user, q1, a.getScore(),time);
@@ -80,7 +81,7 @@ public class EmotionService {
         return new EmotionResultDTO(getResult(user, time));
     }
 
-    private EmotionResult getResult(User user, LocalDateTime time){
+    private Result getResult(User user, LocalDateTime time){
         Collection<Object> insertedObjects = (Collection<Object>) kSession.getObjects();
         // Print the inserted objects
 //        System.out.println("+++++++++++++++++++++++++++++++++++++++++");
@@ -94,10 +95,10 @@ public class EmotionService {
                 System.out.println(newEmotion.getTime());
 //                kSession.delete(insertedObject);
                 if(newEmotion.getUser().getId() == user.getId()){
-                    EmotionResult emotionResult = new EmotionResult(user, newEmotion.getDetectionType(), time);
+                    Result emotionResult = new Result(user, newEmotion.getDetectionType(), time);
                     FactHandle factHandle = kSession.getFactHandle(insertedObject);
                     kSession.delete(factHandle);
-                    return emotionResultRepository.save(emotionResult);
+                    return resultRepository.save(emotionResult);
                 }
             }
         }
@@ -185,23 +186,23 @@ public class EmotionService {
 
     public List<EmotionHistoryDTO> getAllEmotions(PageRequest of, String loggedInUser) {
 //        User user = this.userRepository.findByEmail(loggedInUser);
-        return convertToEmotionHistoryDTO(this.emotionResultRepository.findByEmail(loggedInUser, of));
+        return convertToEmotionHistoryDTO(this.resultRepository.findByEmail(loggedInUser, of));
     }
 
-    private List<EmotionHistoryDTO> convertToEmotionHistoryDTO(List<EmotionResult> emotionResultList) {
+    private List<EmotionHistoryDTO> convertToEmotionHistoryDTO(List<Result> emotionResultList) {
         List<EmotionHistoryDTO> result = new ArrayList<>();
-        for (EmotionResult emotionResult: emotionResultList){
+        for (Result emotionResult: emotionResultList){
             result.add(new EmotionHistoryDTO(emotionResult));
         }
         return result;
     }
 
     public long getEmotionHistoryCount(String loggedInUser) {
-        return this.emotionResultRepository.countByUserEmail(loggedInUser);
+        return this.resultRepository.countByUserEmail(loggedInUser);
     }
 
     public List<QuestionAnswerByEmotionDTO> getAnswers(long id) {
-        EmotionResult emotionResult = this.emotionResultRepository.findById(id).orElse(null);
+        Result emotionResult = this.resultRepository.findById(id).orElse(null);
         User user = emotionResult.getUser();
         List<Answer> answers = this.answerRepository.findByUserIdAndTime(user.getId(), emotionResult.getTime());
         return convertToQuestionAnswerDTO(answers);

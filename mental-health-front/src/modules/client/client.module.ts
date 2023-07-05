@@ -16,7 +16,7 @@ import {SharedModule} from "../shared/shared.module";
 import { EmotionHistoryComponent } from './pages/emotion-history/emotion-history.component';
 import {TableModule} from "primeng/table";
 import { EmotionSurveyOverviewComponent } from '../shared/components/emotion-survey-overview/emotion-survey-overview.component';
-import { QuestionsComponent } from './pages/questions/questions.component';
+import { DiagnosticSurveyComponent } from './pages/diagnostic-survey/diagnostic-survey.component';
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatDividerModule} from "@angular/material/divider";
 import {MatGridListModule} from "@angular/material/grid-list";
@@ -36,7 +36,7 @@ import {MatSelectModule} from "@angular/material/select";
     EmotionResultComponent,
     EmotionHistoryComponent,
     EmotionSurveyOverviewComponent,
-    QuestionsComponent,
+    DiagnosticSurveyComponent,
     DiagnosticResultComponent,
     AddPsychologistComponent,
     ViewPsychologistComponent,

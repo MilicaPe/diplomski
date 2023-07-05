@@ -1,0 +1,30 @@
+
+<ng-template #ruleParams>
+
+</ng-template>
+
+<div  style="margin-left: 10%;">
+  <img src="assets/psychologist/more.png" (click)="addRuleParams()">
+  <img src="assets/psychologist/minus.png" (click)="removeRuleParams()">
+</div>
+
+<div class="row msg ">
+  <mat-form-field>
+    <mat-label>Poruka</mat-label>
+    <textarea matInput name="questionText" [formControl]="messageFormControl"
+              cols="300" rows="6" placeholder="Poruka"
+    ></textarea>
+  </mat-form-field>
+
+</div>
+
+<div class="row">
+  <div class="col-4"></div>
+  <div class="col-3">
+    <button mat-raised-button color="primary" (click)="addRule()">Dodaj pravilo</button>
+  </div>
+</div>
+
+<p-toast position="top-right" key="rule-message"></p-toast>
+
+

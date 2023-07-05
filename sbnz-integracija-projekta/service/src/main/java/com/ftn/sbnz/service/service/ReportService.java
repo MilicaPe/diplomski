@@ -1,15 +1,14 @@
 package com.ftn.sbnz.service.service;
 
 import com.ftn.sbnz.model.DetectionType;
-import com.ftn.sbnz.model.EmotionResult;
+import com.ftn.sbnz.model.Result;
 import com.ftn.sbnz.model.Gender;
 import com.ftn.sbnz.model.User;
 import com.ftn.sbnz.service.dto.EmotionHistoryDTO;
 import com.ftn.sbnz.service.dto.report.DetectionReportDTO;
-import com.ftn.sbnz.service.dto.report.DetectionReportParamDTO;
 import com.ftn.sbnz.service.dto.report.JobReportDTO;
 import com.ftn.sbnz.service.dto.report.JobReportParamDTO;
-import com.ftn.sbnz.service.repository.EmotionResultRepository;
+import com.ftn.sbnz.service.repository.ResultRepository;
 import com.ftn.sbnz.service.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -24,39 +23,39 @@ import java.util.*;
 @Transactional
 public class ReportService {
     @Autowired
-    private EmotionResultRepository emotionResultRepository;
+    private ResultRepository resultRepository;
 
     @Autowired
     private UserRepository userRepository;
 
     public List<EmotionHistoryDTO> getUsersDetections(long userId, PageRequest of){
-        List<EmotionResult> results= this.emotionResultRepository.findAllByUserId(userId, of);
+        List<Result> results= this.resultRepository.findAllByUserId(userId, of);
         List<EmotionHistoryDTO> resultDTOS = new ArrayList<>();
-        for(EmotionResult er: results){
+        for(Result er: results){
             resultDTOS.add(new EmotionHistoryDTO(er));
         }
          return resultDTOS;
     }
 
     public long getUsersDetections(long userId){
-        return this.emotionResultRepository.countByUserId(userId);
+        return this.resultRepository.countByUserId(userId);
     }
 
 
     public List<JobReportDTO> getJobReport(JobReportParamDTO params) {
         List<User> users = filterUsers(params);
-        List<EmotionResult> result = new ArrayList<>();
+        List<Result> result = new ArrayList<>();
         for(User u :users){
-            result.addAll(u.getEmotionResults());
+            result.addAll(u.getResults());
         }
         return formJobReport(result);
 
     }
 
-    private List<JobReportDTO> formJobReport(List<EmotionResult> result){
+    private List<JobReportDTO> formJobReport(List<Result> result){
         Map<DetectionType, Integer> res = new HashMap<>();
         DetectionType keyValue = null;
-        for(EmotionResult e: result){
+        for(Result e: result){
             keyValue = e.getDetected();
             if (res.containsKey(keyValue)) {
                 res.put(keyValue, (res.get(keyValue)+1));
@@ -86,14 +85,14 @@ public class ReportService {
     }
 
     public DetectionReportDTO getDetectionTimeReport(DetectionType detection, LocalDateTime start, LocalDateTime end){
-        List<EmotionResult> results = this.emotionResultRepository.findAllByDetectedAndTime(detection, start, end);
+        List<Result> results = this.resultRepository.findAllByDetectedAndTime(detection, start, end);
         return formDetectionReport(results);
       //  return null;
     }
 
-    private DetectionReportDTO formDetectionReport (List<EmotionResult> result){
+    private DetectionReportDTO formDetectionReport (List<Result> result){
         Map<String, Integer> res = new HashMap<>();
-        for(EmotionResult e: result){
+        for(Result e: result){
             String keyValue = formDateString(e.getTime());
             if (res.containsKey(keyValue)) {
                 res.put(keyValue, (res.get(keyValue)+1));

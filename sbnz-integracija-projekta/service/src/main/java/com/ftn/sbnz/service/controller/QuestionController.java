@@ -37,4 +37,9 @@ public class QuestionController {
         return new ResponseEntity<>(paginationDTO, HttpStatus.OK);
     }
 
+    @GetMapping(value="question/depression")
+    public ResponseEntity<List<QuestionDTO>>getQuestionsMarkDepression(){
+        List<QuestionDTO> questionDTOS = this.questionService.getDepressionQuestions();
+        return new ResponseEntity<>(questionDTOS, HttpStatus.OK);
+    }
 }

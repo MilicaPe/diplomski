@@ -16,7 +16,7 @@ public enum DetectionType {
     GENERALNI_ANKSIOZNI_POREMECAJ(11),
     USLOVI_ZA_PANICNI_NAPAD(12),
     PANICNI_POREMECAJ(13),
-    USLOVI_ZA_SOCIJAlNU_ANKSIOZNOST(14),
+    USLOVI_ZA_SOCIJALNU_ANKSIOZNOST(14),
     SOCIJALNA_FOBIJA(15);
 
     private final int value;
@@ -40,7 +40,7 @@ public enum DetectionType {
             case 11: return DetectionType.GENERALNI_ANKSIOZNI_POREMECAJ;
             case 12: return DetectionType.USLOVI_ZA_PANICNI_NAPAD;
             case 13: return DetectionType.PANICNI_POREMECAJ;
-            case 14: return DetectionType.USLOVI_ZA_SOCIJAlNU_ANKSIOZNOST;
+            case 14: return DetectionType.USLOVI_ZA_SOCIJALNU_ANKSIOZNOST;
             case 15: return DetectionType.SOCIJALNA_FOBIJA;
             default: return DetectionType.ANKSIOZNOST;
         }

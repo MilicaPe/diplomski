@@ -19,14 +19,26 @@ public class QuestionService {
     private QuestionRepository questionRepository;
 
     public List<QuestionDTO> getQuestions(QuestionLayer questionLayer, List<DetectionType> detectionTypes){
-        List<QuestionDTO> questionDTOS = new ArrayList<>();
         List<Question> questions = new ArrayList<>();
         for(DetectionType detectionType : detectionTypes){
+            System.out.println(" det : " + detectionType);
+            System.out.println(" ques layer: " + questionLayer);
             questions.addAll(this.questionRepository.getQuestionsByDetectionTypeAndQuestionLayer(detectionType, questionLayer));
         }
+        List<QuestionDTO> questionDTOS = formQuestionDTO(questions);
+        return questionDTOS;
+    }
+
+    private List<QuestionDTO> formQuestionDTO( List<Question> questions) {
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
         for(Question question: questions){
             questionDTOS.add(new QuestionDTO(question.getId(), question.getText()));
         }
         return questionDTOS;
+    }
+
+    public List<QuestionDTO> getDepressionQuestions() {
+        List<Question> questions = this.questionRepository.getQuestionsByPositiveDepressionMark();
+        return formQuestionDTO(questions);
     }
 }

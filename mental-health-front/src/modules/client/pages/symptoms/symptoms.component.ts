@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AnswerService} from "../../services/answer-service/answer.service";
+import {DiagnosticService} from "../../services/diagnostic-service/diagnostic.service";
 
 interface Symptom {
   value: string;
@@ -15,21 +15,18 @@ export class SymptomsComponent {
 
 
   symptoms: Symptom[] = [
-   // {value: 'USLOV_ANK', viewValue: 'Uslovi za anksioznost'},
-    {value: 'ANK', viewValue: 'Anksioznost'},
-    {value: 'GAD', viewValue: 'Genereralni anksiozni poremećaj'},
-    //{value: 'USLOV_PAN', viewValue: 'Uslovi za panični napad'},
-    {value: 'PAN', viewValue: 'Panični napad'},
-    {value: 'PAN_POR', viewValue: 'Panični poremećaj'},
-   // {value: 'USLOV_SOC', viewValue: 'Uslovi za socijalnu anksioznost'},
-    {value: 'SOC', viewValue: 'Socijalna anksioznost'},
-    {value: 'SOC_FOB', viewValue: 'Socijalna fobija'},
+    {value: 'ANKSIOZNOST', viewValue: 'Anksioznost'},
+    {value: 'GENERALNI_ANKSIOZNI_POREMECAJ', viewValue: 'Genereralni anksiozni poremećaj'},
+    {value: 'PANICNI_NAPAD', viewValue: 'Panični napad'},
+    {value: 'PANICNI_POREMECAJ', viewValue: 'Panični poremećaj'},
+    {value: 'SOCIJALNA_ANKSIOZNOST', viewValue: 'Socijalna anksioznost'},
+    {value: 'SOCIJALNA_FOBIJA', viewValue: 'Socijalna fobija'},
   ];
   selected: string="";
   result:string[]=[];
   showSelected: string="";
 
-  constructor(private answerService: AnswerService) {}
+  constructor(private answerService: DiagnosticService) {}
 
 
   getSymptoms() {
@@ -43,15 +40,3 @@ export class SymptomsComponent {
     }
   }
 }
-/*
-*
-*   USLOV_ANK(0),
-    ANK(1),
-    GAD(2),
-    USLOV_PAN(3),
-    PAN(4),
-    PAN_POR(5),
-    USLOV_SOC(6),
-    SOC(7),
-    SOC_FOB(8);
-* */

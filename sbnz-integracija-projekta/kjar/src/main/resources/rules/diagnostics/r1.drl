@@ -7,7 +7,6 @@ import com.ftn.sbnz.model.Question;
 import com.ftn.sbnz.model.Intensity;
 import com.ftn.sbnz.model.helper.FullAnswer;
 import com.ftn.sbnz.model.helper.Diagnostic;
-import com.ftn.sbnz.model.helper.SymptomType;
 import com.ftn.sbnz.model.helper.DiagnosticState;
 
 
@@ -31,15 +30,16 @@ salience 80
 
     when
         $d: Diagnostic($uId: userId,
-                        detectionType == DetectionType.ANKSIOZNOST,
+                        detectionType == DetectionType.USLOVI_ZA_ANKSIOZNOST,
                         questionLayer == QuestionLayer.FIRST,
                         finalResult == false,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
         not (Diagnostic(userId == $uId, detectionType == DetectionType.ANKSIOZNOST, questionLayer==QuestionLayer.SECOND))
-        not (Diagnostic(userId == $uId, detectionType == DetectionType.ANKSIOZNOST, questionLayer==QuestionLayer.THIRD))
+        not (Diagnostic(userId == $uId, detectionType == DetectionType.GENERALNI_ANKSIOZNI_POREMECAJ, questionLayer==QuestionLayer.THIRD))
     then
         System.out.println(" Drugi slojjj");
         modify($d){setNextLayer(QuestionLayer.SECOND);}
+        modify($d){setNextDetection(DetectionType.ANKSIOZNOST);}
         //insert(new Diagnostic($uId, $intensity, DetectionType.ANKSIOZNOST, QuestionLayer.FIRST, QuestionLayer.SECOND,  "Primeceni su uslovi za anksioznost. Naredni set pitanja će sadržati i pitanja o anksioznosti", false);)
 end
 
@@ -50,7 +50,7 @@ salience 80
 
     when
         $d1: Diagnostic($uId: userId,
-                            detectionType == DetectionType.ANKSIOZNOST,
+                            detectionType == DetectionType.USLOVI_ZA_ANKSIOZNOST,
                             questionLayer == QuestionLayer.FIRST,
                             finalResult == false,
                             (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
@@ -59,11 +59,12 @@ salience 80
                         questionLayer == QuestionLayer.SECOND,
                         finalResult == false,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
-        not (Diagnostic(userId == $uId, detectionType == DetectionType.ANKSIOZNOST, questionLayer==QuestionLayer.THIRD))
+        not (Diagnostic(userId == $uId, detectionType == DetectionType.GENERALNI_ANKSIOZNI_POREMECAJ, questionLayer==QuestionLayer.THIRD))
 
     then
         System.out.println(" Treci slojjj");
         modify($d2){ setNextLayer(QuestionLayer.THIRD);}
+        modify($d2){ setNextDetection(DetectionType.GENERALNI_ANKSIOZNI_POREMECAJ);}
 
 end
 
@@ -74,7 +75,7 @@ salience 80
 
     when
        $d1: Diagnostic($uId: userId,
-                                detectionType == DetectionType.ANKSIOZNOST,
+                                detectionType == DetectionType.USLOVI_ZA_ANKSIOZNOST,
                                 questionLayer == QuestionLayer.FIRST,
                                 (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
        $d2: Diagnostic(userId == $uId,
@@ -82,7 +83,7 @@ salience 80
                             questionLayer == QuestionLayer.SECOND,
                             (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
        $d3: Diagnostic(userId == $uId,
-                        detectionType == DetectionType.ANKSIOZNOST,
+                        detectionType == DetectionType.GENERALNI_ANKSIOZNI_POREMECAJ,
                         questionLayer == QuestionLayer.THIRD,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
     then
@@ -100,15 +101,16 @@ salience 80
 
     when
         $d: Diagnostic($uId: userId,
-                        detectionType == DetectionType.PANICNI_NAPAD,
+                        detectionType == DetectionType.USLOVI_ZA_PANICNI_NAPAD,
                         questionLayer == QuestionLayer.FIRST,
                         finalResult == false,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
         not (Diagnostic(userId == $uId, detectionType == DetectionType.PANICNI_NAPAD, questionLayer==QuestionLayer.SECOND))
-        not (Diagnostic(userId == $uId, detectionType == DetectionType.PANICNI_NAPAD, questionLayer==QuestionLayer.THIRD))
+        not (Diagnostic(userId == $uId, detectionType == DetectionType.PANICNI_POREMECAJ, questionLayer==QuestionLayer.THIRD))
     then
         System.out.println(" Drugi slojjj panicni napad");
         modify($d){ setNextLayer(QuestionLayer.SECOND);}
+        modify($d){ setNextDetection(DetectionType.PANICNI_NAPAD);}
         //insert(new Diagnostic($uId, $intensity, DetectionType.PANICNI_NAPAD, QuestionLayer.FIRST ,QuestionLayer.SECOND, "Primeceni su uslovi za panični napad. Naredni set pitanja će sadržati i pitanja o paničnim napadima.", false);)
 end
 
@@ -119,7 +121,7 @@ salience 80
 
     when
         $d1: Diagnostic($uId: userId,
-                            detectionType == DetectionType.PANICNI_NAPAD,
+                            detectionType == DetectionType.USLOVI_ZA_PANICNI_NAPAD,
                             questionLayer == QuestionLayer.FIRST,
                             finalResult == false,
                             (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
@@ -128,11 +130,12 @@ salience 80
                         questionLayer == QuestionLayer.SECOND,
                         finalResult == false,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
-        not (Diagnostic(userId == $uId, detectionType == DetectionType.PANICNI_NAPAD, questionLayer==QuestionLayer.THIRD))
+        not (Diagnostic(userId == $uId, detectionType == DetectionType.PANICNI_POREMECAJ, questionLayer==QuestionLayer.THIRD))
 
     then
         System.out.println(" Treci slojjj panicni napad");
         modify($d2){ setNextLayer(QuestionLayer.THIRD);}
+        modify($d2){ setNextDetection(DetectionType.PANICNI_POREMECAJ);}
     //    insert(new Diagnostic($uId, $intensity, DetectionType.PANICNI_NAPAD, QuestionLayer.SECOND, QuestionLayer.THIRD, "Dijagnostikovan je panični napad i naredni set pitanja će sadržati pitanja o paničnom poremećaju.", false);)
 end
 
@@ -143,7 +146,7 @@ salience 80
 
     when
        $d1: Diagnostic($uId: userId,
-                                detectionType == DetectionType.PANICNI_NAPAD,
+                                detectionType == DetectionType.USLOVI_ZA_PANICNI_NAPAD,
                                 questionLayer == QuestionLayer.FIRST,
                                 finalResult == false,
                                 (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
@@ -153,7 +156,7 @@ salience 80
                             finalResult == false,
                             (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
        $d3: Diagnostic(userId == $uId,
-                        detectionType == DetectionType.PANICNI_NAPAD,
+                        detectionType == DetectionType.PANICNI_POREMECAJ,
                         questionLayer == QuestionLayer.THIRD,
                         finalResult == false,
                         $intensity: intensity,
@@ -172,15 +175,16 @@ salience 80
 
     when
         $d: Diagnostic($uId: userId,
-                        detectionType == DetectionType.SOCIJALNA_ANKSIOZNOST,
+                        detectionType == DetectionType.USLOVI_ZA_SOCIJALNU_ANKSIOZNOST,
                         questionLayer == QuestionLayer.FIRST,
                         finalResult == false,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
         not (Diagnostic(userId == $uId, detectionType == DetectionType.SOCIJALNA_ANKSIOZNOST, questionLayer==QuestionLayer.SECOND))
-        not (Diagnostic(userId == $uId, detectionType == DetectionType.SOCIJALNA_ANKSIOZNOST, questionLayer==QuestionLayer.THIRD))
+        not (Diagnostic(userId == $uId, detectionType == DetectionType.SOCIJALNA_FOBIJA, questionLayer==QuestionLayer.THIRD))
     then
         System.out.println(" Drugi slojjj socijalna anksioznost");
         modify($d){setNextLayer(QuestionLayer.SECOND);}
+        modify($d){ setNextDetection(DetectionType.SOCIJALNA_ANKSIOZNOST);}
    //     insert(new Diagnostic($uId, $intensity, DetectionType.SOCIJALNA_ANKSIOZNOST,  QuestionLayer.FIRST, QuestionLayer.SECOND, "Primeceni su uslovi za socijalnu anksioznost. Naredni set pitanja će sadržati i pitanja o socijalnoj anksioznosti", false);)
 end
 
@@ -191,7 +195,7 @@ salience 80
 
     when
         $d1: Diagnostic($uId: userId,
-                            detectionType == DetectionType.SOCIJALNA_ANKSIOZNOST,
+                            detectionType == DetectionType.USLOVI_ZA_SOCIJALNU_ANKSIOZNOST,
                             questionLayer == QuestionLayer.FIRST,
                             finalResult == false,
                             (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
@@ -200,11 +204,12 @@ salience 80
                         questionLayer == QuestionLayer.SECOND,
                         finalResult == false,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
-        not (Diagnostic(userId == $uId, detectionType == DetectionType.SOCIJALNA_ANKSIOZNOST, questionLayer==QuestionLayer.THIRD))
+        not (Diagnostic(userId == $uId, detectionType == DetectionType.SOCIJALNA_FOBIJA, questionLayer==QuestionLayer.THIRD))
 
     then
         System.out.println(" Treci slojjj socijalna anksioznost");
         modify($d2){setNextLayer(QuestionLayer.THIRD);}
+        modify($d2){ setNextDetection(DetectionType.SOCIJALNA_FOBIJA);}
   //      insert(new Diagnostic($uId, $intensity, DetectionType.SOCIJALNA_ANKSIOZNOST, QuestionLayer.SECOND, QuestionLayer.THIRD, "Dijagnostikovana je socijalna anksioznost visokog stepena i naredni set pitanja će sadržati pitanja o socijalnoj fobiji.", false);)
 end
 
@@ -215,7 +220,7 @@ salience 80
 
     when
        $d1: Diagnostic($uId: userId,
-                                detectionType == DetectionType.SOCIJALNA_ANKSIOZNOST,
+                                detectionType == DetectionType.USLOVI_ZA_SOCIJALNU_ANKSIOZNOST,
                                 questionLayer == QuestionLayer.FIRST,
                                 finalResult == false,
                                 (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
@@ -225,7 +230,7 @@ salience 80
                             finalResult == false,
                             (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))
        $d3: Diagnostic(userId == $uId,
-                        detectionType == DetectionType.SOCIJALNA_ANKSIOZNOST,
+                        detectionType == DetectionType.SOCIJALNA_FOBIJA,
                         questionLayer == QuestionLayer.THIRD,
                         finalResult == false,
                         (intensity == Intensity.TESKO || intensity == Intensity.DUBOKO))

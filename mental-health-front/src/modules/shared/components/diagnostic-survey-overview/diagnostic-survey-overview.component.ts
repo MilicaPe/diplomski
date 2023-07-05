@@ -3,7 +3,7 @@ import {QuestionAnswerByEmotionDto} from "../../../client/model/question-answer-
 import {EmotionService} from "../../../client/services/emotion/emotion.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {QuestionAnswerDto} from "../../../client/model/question-answer-dto";
-import {AnswerService} from "../../../client/services/answer-service/answer.service";
+import {DiagnosticService} from "../../../client/services/diagnostic-service/diagnostic.service";
 
 @Component({
   selector: 'app-diagnostic-survey-overview',
@@ -13,7 +13,7 @@ import {AnswerService} from "../../../client/services/answer-service/answer.serv
 export class DiagnosticSurveyOverviewComponent {
   answers : QuestionAnswerDto[] = []
 
-  constructor(private answerService: AnswerService,
+  constructor(private answerService: DiagnosticService,
               public dialogRef: MatDialogRef<DiagnosticSurveyOverviewComponent>,
               @Inject(MAT_DIALOG_DATA) public id: number) {
     this.answerService.getAnswers(id).subscribe(

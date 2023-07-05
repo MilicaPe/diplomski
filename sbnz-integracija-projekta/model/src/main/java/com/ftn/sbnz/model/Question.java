@@ -30,6 +30,9 @@ public class Question {
     @Column
     private boolean positive;
 
+    @Column(nullable = true)
+    private boolean depressionMark;
+
 
 
 }

@@ -9,23 +9,23 @@ export class SymptomToStringPipe implements PipeTransform {
     if (value === null)
       return ""
     switch (value) {
-      case 'USLOV_ANK':
+      case 'USLOVI_ZA_ANKSIOZNOST':
         return 'Uslovi za anksioznost'
-      case 'ANK':
+      case 'ANKSIOZNOST':
         return 'Anksioznost'
-      case 'GAD':
+      case 'GENERALNI_ANKSIOZNI_POREMECAJ':
         return 'Generalni anksiozni poremećaj'
-      case 'USLOV_PAN':
+      case 'USLOVI_ZA_PANICNI_NAPAD':
         return 'Uslovi za panični napad'
-      case 'PAN':
+      case 'PANICNI_NAPAD':
         return 'Panični napad'
-      case 'PAN_POR':
+      case 'PANICNI_POREMECAJ':
         return 'Panični poremećaj'
-      case 'USLOV_SOC':
+      case 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST':
         return 'Uslovi za socijalnu anksioznost'
-      case 'SOC':
+      case 'SOCIJALNA_ANKSIOZNOST':
         return 'Socijalna anksioznost'
-      case 'SOC_FOB':
+      case 'SOCIJALNA_FOBIJA':
         return 'Socijalna fobija'
       default:
         return value

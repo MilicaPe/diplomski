@@ -1,12 +1,11 @@
 package com.ftn.sbnz.service.dto;
 
 import com.ftn.sbnz.model.DetectionType;
-import com.ftn.sbnz.model.EmotionResult;
+import com.ftn.sbnz.model.Result;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDateTime;
 
 @Getter
@@ -19,7 +18,7 @@ public class EmotionHistoryDTO {
     private DetectionType detectionType;
     private boolean emotion;
 
-    public EmotionHistoryDTO(EmotionResult emotionResult) {
+    public EmotionHistoryDTO(Result emotionResult) {
         this.id = emotionResult.getId();
         this.time = emotionResult.getTime();
         this.detectionType = emotionResult.getDetected();
