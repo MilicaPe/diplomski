@@ -11,7 +11,7 @@ import org.kie.api.definition.type.Position;
 @NoArgsConstructor
 public class DiagnosticState {
     @Position(0)
-    public DetectionType symptom;
+    public String symptom;
     @Position(1)
-    public DetectionType diagnosticState;
+    public String diagnosticState;
 }

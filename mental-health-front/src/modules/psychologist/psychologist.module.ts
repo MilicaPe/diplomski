@@ -21,6 +21,10 @@ import {ChartModule} from "primeng/chart";
 import {ToastModule} from "primeng/toast";
 import { DefineRulesComponent } from './pages/define-rules/define-rules.component';
 import { RuleParamsComponent } from './components/rule-params/rule-params.component';
+import { TemplateParamComponent } from './components/template-param/template-param.component';
+import {MatRadioModule} from "@angular/material/radio";
+import { AddNewQuestionComponent } from './components/add-new-question/add-new-question.component';
+import { AddNewSurveyComponent } from './pages/add-new-survey/add-new-survey.component';
 import { AddTemplateComponent } from './pages/add-template/add-template.component';
 
 
@@ -34,25 +38,29 @@ import { AddTemplateComponent } from './pages/add-template/add-template.componen
     ReportDetectionTimeComponent,
     DefineRulesComponent,
     RuleParamsComponent,
+    TemplateParamComponent,
+    AddNewQuestionComponent,
+    AddNewSurveyComponent,
     AddTemplateComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(PsychologistRoutes),
-        MatTabsModule,
-        MatSelectModule,
-        FormsModule,
-        MatButtonModule,
-        SharedModule,
-        TableModule,
-        MatInputModule,
-        MatDividerModule,
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        ChartModule,
-        ToastModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(PsychologistRoutes),
+    MatTabsModule,
+    MatSelectModule,
+    FormsModule,
+    MatButtonModule,
+    SharedModule,
+    TableModule,
+    MatInputModule,
+    MatDividerModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ChartModule,
+    ToastModule,
+    MatRadioModule
+  ]
 })
 export class PsychologistModule { }

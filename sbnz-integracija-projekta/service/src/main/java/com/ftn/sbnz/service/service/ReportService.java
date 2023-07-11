@@ -53,8 +53,8 @@ public class ReportService {
     }
 
     private List<JobReportDTO> formJobReport(List<Result> result){
-        Map<DetectionType, Integer> res = new HashMap<>();
-        DetectionType keyValue = null;
+        Map<String, Integer> res = new HashMap<>();
+        String keyValue = null;
         for(Result e: result){
             keyValue = e.getDetected();
             if (res.containsKey(keyValue)) {

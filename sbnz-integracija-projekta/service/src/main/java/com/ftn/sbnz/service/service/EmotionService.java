@@ -3,10 +3,7 @@ package com.ftn.sbnz.service.service;
 import com.ftn.sbnz.model.*;
 import com.ftn.sbnz.model.dto.EmotionDetection;
 import com.ftn.sbnz.service.dto.*;
-import com.ftn.sbnz.service.repository.AnswerRepository;
-import com.ftn.sbnz.service.repository.QuestionRepository;
-import com.ftn.sbnz.service.repository.ResultRepository;
-import com.ftn.sbnz.service.repository.UserRepository;
+import com.ftn.sbnz.service.repository.*;
 import org.drools.decisiontable.ExternalSpreadsheetCompiler;
 import org.kie.api.builder.Message;
 import org.kie.api.builder.Results;
@@ -31,6 +28,9 @@ public class EmotionService {
     private final KieContainer kieContainer;
 
     private KieSession kSession;
+
+    @Autowired
+    private DetectionTypeRepository detectionTypeRepository;
 
     @Autowired
     public EmotionService(KieContainer kieContainer) throws IOException {
@@ -166,13 +166,13 @@ public class EmotionService {
     }
 
     public List<QuestionDTO> getQuestions() {
-        List<QuestionDTO> questions = convertToQuestionDTO(questionRepository.findByDetectionType(DetectionType.SAD));
-        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType(DetectionType.DISGUSTED)));
-        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType(DetectionType.ANGRY)));
-        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType(DetectionType.FEARFUL)));
-        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType(DetectionType.BAD)));
-        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType(DetectionType.SURPRISED)));
-        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType(DetectionType.HAPPY)));
+        List<QuestionDTO> questions = convertToQuestionDTO(questionRepository.findByDetectionType("SAD"));
+        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType("DISGUSTED")));
+        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType("ANGRY")));
+        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType("FEARFUL")));
+        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType("BAD")));
+        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType("SURPRISED")));
+        questions.addAll(convertToQuestionDTO(questionRepository.findByDetectionType("HAPPY")));
         return questions;
     }
 
@@ -217,26 +217,26 @@ public class EmotionService {
         List<QuestionAnswerDTO> resultSurprised = new ArrayList<>();
         List<QuestionAnswerDTO> resultHappy= new ArrayList<>();
         for (Answer a: answers){
-            switch (a.getQuestion().getDetectionType()){
-                case SAD: resultSad.add(new QuestionAnswerDTO(a)); break;
-                case DISGUSTED: resultDisgusted.add(new QuestionAnswerDTO(a)); break;
-                case ANGRY: resultAngry.add(new QuestionAnswerDTO(a)); break;
-                case FEARFUL: resultFearful.add(new QuestionAnswerDTO(a)); break;
-                case BAD: resultBad.add(new QuestionAnswerDTO(a)); break;
-                case SURPRISED: resultSurprised.add(new QuestionAnswerDTO(a)); break;
-                case HAPPY: resultHappy.add(new QuestionAnswerDTO(a)); break;
+            switch (a.getQuestion().getDetectionType().getType()){
+                case "SAD": resultSad.add(new QuestionAnswerDTO(a)); break;
+                case "DISGUSTED": resultDisgusted.add(new QuestionAnswerDTO(a)); break;
+                case "ANGRY": resultAngry.add(new QuestionAnswerDTO(a)); break;
+                case "FEARFUL": resultFearful.add(new QuestionAnswerDTO(a)); break;
+                case "BAD": resultBad.add(new QuestionAnswerDTO(a)); break;
+                case "SURPRISED": resultSurprised.add(new QuestionAnswerDTO(a)); break;
+                case "HAPPY": resultHappy.add(new QuestionAnswerDTO(a)); break;
                 default: break;
             }
 //            result.add();
         }
         List<QuestionAnswerByEmotionDTO> result = new ArrayList<>();
-        result.add(new QuestionAnswerByEmotionDTO(resultSad, DetectionType.SAD));
-        result.add(new QuestionAnswerByEmotionDTO(resultAngry, DetectionType.ANGRY));
-        result.add(new QuestionAnswerByEmotionDTO(resultBad, DetectionType.BAD));
-        result.add(new QuestionAnswerByEmotionDTO(resultHappy, DetectionType.HAPPY));
-        result.add(new QuestionAnswerByEmotionDTO(resultDisgusted, DetectionType.DISGUSTED));
-        result.add(new QuestionAnswerByEmotionDTO(resultFearful, DetectionType.FEARFUL));
-        result.add(new QuestionAnswerByEmotionDTO(resultSurprised, DetectionType.SURPRISED));
+        result.add(new QuestionAnswerByEmotionDTO(resultSad, detectionTypeRepository.getDetectionTypeByType("SAD")));
+        result.add(new QuestionAnswerByEmotionDTO(resultAngry, detectionTypeRepository.getDetectionTypeByType("ANGRY")));
+        result.add(new QuestionAnswerByEmotionDTO(resultBad, detectionTypeRepository.getDetectionTypeByType("BAD")));
+        result.add(new QuestionAnswerByEmotionDTO(resultHappy, detectionTypeRepository.getDetectionTypeByType("HAPPY")));
+        result.add(new QuestionAnswerByEmotionDTO(resultDisgusted, detectionTypeRepository.getDetectionTypeByType("DISGUSTED")));
+        result.add(new QuestionAnswerByEmotionDTO(resultFearful, detectionTypeRepository.getDetectionTypeByType("FEARFUL")));
+        result.add(new QuestionAnswerByEmotionDTO(resultSurprised, detectionTypeRepository.getDetectionTypeByType("SURPRISED")));
 
         return result;
     }

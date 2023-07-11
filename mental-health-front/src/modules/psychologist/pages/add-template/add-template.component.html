@@ -1,27 +1,20 @@
-<p>add-template works!</p>
-<div class="row">
+<ng-template #templateParams>
 
-<!--  <div class="col-2">-->
-<!--    <mat-form-field appearance="fill">-->
-<!--      <mat-label>Unesi adresu</mat-label>-->
-<!--      <input matInput [(ngModel)]="newRealEstate.address">-->
-<!--    </mat-form-field>-->
-<!--  </div>-->
+</ng-template>
 
-<!--  <div class="col-2">-->
-<!--    <mat-form-field appearance="fill">-->
-<!--      <mat-label>Unesi min</mat-label>-->
-<!--      <input matInput [(ngModel)]="min">-->
-<!--    </mat-form-field>-->
-<!--  </div>-->
-
-<!--  <div class="col-2">-->
-<!--    <mat-form-field appearance="fill">-->
-<!--      <mat-label>Unesi max</mat-label>-->
-<!--      <input matInput [(ngModel)]="max">-->
-<!--    </mat-form-field>-->
-<!--  </div>-->
-
-
-
+<div  style="margin-left: 20%;">
+  <img src="assets/psychologist/more.png" (click)="addTemplateParams()">
+  <img src="assets/psychologist/minus.png" (click)="removeTemplateParams()">
 </div>
+
+
+<div class="row">
+  <div class="col-5"></div>
+  <div class="col-2">
+
+    <button mat-raised-button color="primary" (click)="addTemplate()">Dodaj pravila</button>
+  </div>
+</div>
+
+<p-toast position="top-right" key="rule-message"></p-toast>
+

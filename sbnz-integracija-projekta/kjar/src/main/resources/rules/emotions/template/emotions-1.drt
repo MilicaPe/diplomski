@@ -13,7 +13,6 @@ import com.ftn.sbnz.model.User;
 import com.ftn.sbnz.model.Intensity;
 import com.ftn.sbnz.model.Question;
 import com.ftn.sbnz.model.QuestionLayer;
-import com.ftn.sbnz.model.DetectionType;
 import com.ftn.sbnz.model.dto.EmotionDetection;
 
 template "CA"
@@ -27,7 +26,7 @@ when
     Number(intValue >= @{from}, intValue <= @{to}) from accumulate(
             $a1: Answer(
                 user.id == $uId,
-                question.detectionType == DetectionType.@{emotion},
+                question.detectionType == "@{emotion}",
                 question.questionLayer == QuestionLayer.@{nivo},
                 $sc2: score
             ),
@@ -37,7 +36,7 @@ when
 then
     //System.out.println("Ispis");
     //System.out.println("@{type}");
-    EmotionDetection em =new EmotionDetection(Intensity.@{type}, $u, QuestionLayer.@{nivo}, DetectionType.@{emotion}, LocalDateTime.now());
+    EmotionDetection em =new EmotionDetection(Intensity.@{type}, $u, QuestionLayer.@{nivo}, "@{emotion}", LocalDateTime.now());
     insert(em);
 end
 

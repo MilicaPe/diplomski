@@ -10,6 +10,6 @@ import org.kie.api.definition.rule.All;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobReportDTO {
-    private DetectionType detectionType;
+    private String detectionType;
     private int count;
 }

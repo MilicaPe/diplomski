@@ -19,6 +19,6 @@ public class EmotionDetection {
     private Intensity intensity;
     private User user;
     private QuestionLayer questionLayer;
-    private DetectionType detectionType;
+    private String detectionType;
     private LocalDateTime time;
 }

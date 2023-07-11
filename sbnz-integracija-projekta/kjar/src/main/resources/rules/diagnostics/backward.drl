@@ -9,7 +9,7 @@ import com.ftn.sbnz.model.helper.DiagnosticState;
 
 
 
-query isContainedIn(DetectionType s1, DetectionType s2)
+query isContainedIn(String s1, String s2)
     DiagnosticState( s1, s2; )
     or
     ((DiagnosticState(x, s2; )) and (isContainedIn (s1, x; )))
@@ -20,7 +20,7 @@ end
 rule "go4"
 
 when
-    $s:DetectionType();
+    $s:String();
     isContainedIn( thing, $s ; )
 then
     System.out.println( "thing " + thing + " is in the GAd" );

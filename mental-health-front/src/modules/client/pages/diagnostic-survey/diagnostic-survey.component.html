@@ -18,7 +18,7 @@
 
     <h2>Pitanja</h2>
     <div align="left" *ngFor="let q of currentQuestionsToShow let i=index;">
-      <p>{{q.id}}. {{q.text}}</p>
+      <p>{{q.text}}</p>
       <mat-radio-group id="q.id" aria-label="Select an option" [(ngModel)]="q.score"
                        (change)="onRadioButtonSelected(q.id, $event)">
         <mat-radio-button value=1>1</mat-radio-button>

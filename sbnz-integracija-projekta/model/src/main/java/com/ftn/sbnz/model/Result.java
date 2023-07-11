@@ -17,24 +17,25 @@ public class Result {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name="userId", referencedColumnName = "id")
     private User user;
 
-    private DetectionType detected;
+    private String detected;
 
     private LocalDateTime time;
 
-    public Result(User user, DetectionType detected, LocalDateTime time) {
+    public Result(User user, String detected, LocalDateTime time) {
         this.user = user;
         this.detected = detected;
         this.time = time;
     }
 
     public boolean isEmotion() {
-        if (detected == DetectionType.SAD || detected == DetectionType.BAD || detected == DetectionType.DISGUSTED ||
-                detected == DetectionType.FEARFUL || detected == DetectionType.HAPPY || detected == DetectionType.SURPRISED ||
-                detected == DetectionType.ANGRY) return true;
+        if (detected.equals("SAD") || detected.equals("BAD") || detected.equals("DISGUSTED") ||
+                detected.equals("FEARFUL") || detected.equals("HAPPY") || detected.equals("SURPRISED") ||
+                detected.equals("ANGRY")) return true;
         return false;
     }
 }

@@ -10,7 +10,6 @@ text
 package diagnostics;
 
 import com.ftn.sbnz.model.QuestionLayer;
-import com.ftn.sbnz.model.DetectionType;
 import com.ftn.sbnz.model.Question;
 import com.ftn.sbnz.model.Intensity;
 import com.ftn.sbnz.model.User;
@@ -20,14 +19,14 @@ import com.ftn.sbnz.model.helper.Diagnostic;
 template "templ-1"
 rule "Diagnostic_@{row.rowNumber}"
 agenda-group "first-diagnostic"
-salience 90
+//salience 90
 
 when
     $u: User($uId: id)
     $total: Number() from accumulate(
         $a1: FullAnswer(
             user.id==$uId,
-            question.detectionType == DetectionType.@{type},
+            question.detectionType.getType() == "@{type}",
             question.questionLayer == QuestionLayer.@{layer},
             $s: score
             ),
@@ -37,7 +36,7 @@ when
 
 then
     System.out.println("Okinulo se pravilo i score je: " + $total);
-    insert(new Diagnostic($uId, Intensity.@{intensity}, DetectionType.@{type}, QuestionLayer.@{layer}, null, null, "@{text}", @{finalResult}));
+    insert(new Diagnostic($uId, Intensity.@{intensity}, "@{type}", QuestionLayer.@{layer}, null, null, "@{text}", @{finalResult}));
 end
 
 end template

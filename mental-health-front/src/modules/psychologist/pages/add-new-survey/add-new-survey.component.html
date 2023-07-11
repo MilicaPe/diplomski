@@ -1,0 +1,20 @@
+<ng-template #questionParams>
+
+</ng-template>
+
+<div  style="margin-left: 10%;">
+  <img src="assets/psychologist/more.png" (click)="addQuestionParams()">
+  <img src="assets/psychologist/minus.png" (click)="removeQuestionParams()">
+</div>
+
+
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-2">
+
+    <button mat-raised-button color="primary" (click)="addQuestion()">Dodaj pitanja</button>
+  </div>
+</div>
+
+<p-toast position="top-right" key="rule-message"></p-toast>
+

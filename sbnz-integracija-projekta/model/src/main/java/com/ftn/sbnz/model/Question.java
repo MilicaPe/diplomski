@@ -24,7 +24,8 @@ public class Question {
     @Column
     private QuestionLayer questionLayer;
 
-    @Column
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "detectionTypeId", referencedColumnName = "id")
     private DetectionType detectionType;
 
     @Column

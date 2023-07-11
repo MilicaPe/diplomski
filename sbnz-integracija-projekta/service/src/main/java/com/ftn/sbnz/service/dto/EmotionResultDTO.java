@@ -16,7 +16,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class EmotionResultDTO {
 
-    private DetectionType detectionType;
+    private String detectionType;
     private LocalDateTime time;
 
     public EmotionResultDTO(Result result) {

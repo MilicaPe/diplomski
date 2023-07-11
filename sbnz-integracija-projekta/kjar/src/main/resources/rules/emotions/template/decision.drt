@@ -12,7 +12,6 @@ import com.ftn.sbnz.model.User;
 import com.ftn.sbnz.model.Intensity;
 import com.ftn.sbnz.model.Question;
 import com.ftn.sbnz.model.QuestionLayer;
-import com.ftn.sbnz.model.DetectionType;
 import com.ftn.sbnz.model.dto.EmotionDetection;
 
 template "decision"
@@ -26,19 +25,19 @@ when
     $e1: EmotionDetection(
             $u == user,
             QuestionLayer.THIRD == questionLayer,
-            detectionType == DetectionType.@{emotion1}
+            detectionType == "@{emotion1}"
             )
     $e2: EmotionDetection(
             this != $e1,
             $u == user,
             QuestionLayer.THIRD == questionLayer,
-            detectionType == DetectionType.@{emotion2}
+            detectionType == "@{emotion2}"
             )
 
 then
     System.out.println("Ispis KONK");
-    System.out.println(DetectionType.@{emotionResult});
-    EmotionDetection em =new EmotionDetection(Intensity.IZRAZENO, $u, QuestionLayer.THIRD, DetectionType.@{emotionResult}, LocalDateTime.now());
+    System.out.println("@{emotionResult}");
+    EmotionDetection em =new EmotionDetection(Intensity.IZRAZENO, $u, QuestionLayer.THIRD, "@{emotionResult}", LocalDateTime.now());
     insert(em);
     delete($e1);
     delete($e2);

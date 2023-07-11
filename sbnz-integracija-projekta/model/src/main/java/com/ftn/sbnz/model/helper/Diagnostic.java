@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 public class Diagnostic {
     private long userId;
     private Intensity intensity;
-    private DetectionType detectionType;
+    private String detectionType;
     private QuestionLayer questionLayer;
 
     private QuestionLayer nextLayer;
-    private DetectionType nextDetection;
+    private String nextDetection;
     private String text;
     private boolean finalResult;
 

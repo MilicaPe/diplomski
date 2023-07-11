@@ -11,6 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 
 import java.util.Arrays;
 //import org.springframework.context.annotation.ComponentScan;
@@ -28,6 +29,7 @@ public class ServiceApplication  {
 	}
 
 	@Bean
+	@Order(2)
 	public KieContainer kieContainer() {
 		KieServices ks = KieServices.Factory.get();
 		KieContainer kContainer = ks

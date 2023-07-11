@@ -11,11 +11,11 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    @Query("select q from Question q where q.detectionType = ?1")
-    List<Question> findByDetectionType(DetectionType detectionType);
+    @Query("select q from Question q where q.detectionType.type = ?1")
+    List<Question> findByDetectionType(String detectionType);
 
-
-    List<Question> getQuestionsByDetectionTypeAndQuestionLayer(DetectionType detectionType, QuestionLayer questionLayer);
+    @Query("select q from Question q where q.detectionType.type = ?1 and q.questionLayer = ?2")
+    List<Question> getQuestionsByDetectionTypeAndQuestionLayer(String detectionType, QuestionLayer questionLayer);
 
     @Query("select q from Question q where q.depressionMark = true")
     List<Question>getQuestionsByPositiveDepressionMark();

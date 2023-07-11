@@ -7,6 +7,7 @@ import {MatRadioChange} from "@angular/material/radio";
 import {DiagnosticService} from "../../services/diagnostic-service/diagnostic.service";
 import {ResultDto} from "../../model/ResultDto";
 import {MessageService} from "primeng/api";
+import {DetectionTypeService} from "../../../psychologist/services/detection-type-service/detection-type.service";
 
 @Component({
   selector: 'app-diagnostic-survey',
@@ -25,25 +26,31 @@ export class DiagnosticSurveyComponent implements OnInit {
   questionHidden = false
   resultHidden = true
   nextLayer: string = "FIRST"
-  nextType: string = "USLOVI_ZA_ANKSIOZNOST USLOVI_ZA_PANICNI_NAPAD USLOVI_ZA_SOCIJALNU_ANKSIOZNOST"
-
+  nextType:string[] = []
 
   constructor(private questionService: QuestionService,
               private answerService: DiagnosticService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private detectionTypeService: DetectionTypeService) {
   }
 
   ngOnInit(): void {
-    this.questionService.getQuestionSet(this.nextLayer, this.nextType).subscribe(res => {
-      this.questions = res.resultList;
-      this.questionsLen = res.totalCount;
-      this.makeAnswers()
-      this.currentQuestionsToShow = this.questions.slice(this.pageIndex * this.pageSize,
-        this.pageIndex * this.pageSize + this.pageSize);
-      console.log("stigla pitanja")
-      console.log(res)
-    })
+    this.detectionTypeService.getMentalDetectionTypes().subscribe(res=>{
+      for(let detectionTypeDto of res){
+        this.nextType.push(detectionTypeDto.type);
+      }
+      console.log(this.nextType);
 
+      this.questionService.getQuestionSet(this.nextLayer, this.nextType).subscribe(res => {
+        this.questions = res.resultList;
+        this.questionsLen = res.totalCount;
+        this.makeAnswers()
+        this.currentQuestionsToShow = this.questions.slice(this.pageIndex * this.pageSize,
+          this.pageIndex * this.pageSize + this.pageSize);
+        console.log("stigla pitanja")
+        console.log(res)
+      })
+    })
   }
 
   onPageChange($event: PageEvent) {
@@ -111,10 +118,10 @@ export class DiagnosticSurveyComponent implements OnInit {
 
   analiseResult(): void {
     let layer: string = ""
-    let type: string = ""
+    let type: string[] = []
     for (let d of this.resultDto.diagnostics) {
       if (d.finalResult === false) {
-        type = type + d.nextDetection + " "
+        type.push(d.nextDetection)
         layer = d.nextLayer
       }
     }

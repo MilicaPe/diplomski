@@ -35,7 +35,7 @@ public class ResultService {
         Result result = this.resultRepository.findById(id).orElse(null);
         User user = result.getUser();
         QuestionLayer layer = getLayerForRequest(result.getDetected());
-        DetectionType detectionType = result.getDetected();
+        String detectionType = result.getDetected();
         List<Answer> answers = this.answerRepository.findByUserIdAndTimeForDiagnostic(user.getId(), result.getTime().minusHours(3), result.getTime().plusHours(3), detectionType, layer);
         return convertToQuestionAnswerDTO(answers);
     }
@@ -47,17 +47,17 @@ public class ResultService {
         return result;
     }
 
-    private QuestionLayer getLayerForRequest(DetectionType detectionType){
+    private QuestionLayer getLayerForRequest(String detectionType){
         switch (detectionType){
-            case USLOVI_ZA_ANKSIOZNOST: return QuestionLayer.FIRST;
-            case ANKSIOZNOST: return QuestionLayer.SECOND;
-            case GENERALNI_ANKSIOZNI_POREMECAJ: return QuestionLayer.THIRD;
-            case USLOVI_ZA_PANICNI_NAPAD: return QuestionLayer.FIRST;
-            case PANICNI_NAPAD: return QuestionLayer.SECOND;
-            case PANICNI_POREMECAJ: return QuestionLayer.THIRD;
-            case USLOVI_ZA_SOCIJALNU_ANKSIOZNOST: return QuestionLayer.FIRST;
-            case SOCIJALNA_ANKSIOZNOST: return QuestionLayer.SECOND;
-            case SOCIJALNA_FOBIJA: return QuestionLayer.THIRD;
+            case "USLOVI_ZA_ANKSIOZNOST": return QuestionLayer.FIRST;
+            case "ANKSIOZNOST": return QuestionLayer.SECOND;
+            case "GENERALNI_ANKSIOZNI_POREMECAJ": return QuestionLayer.THIRD;
+            case "USLOVI_ZA_PANICNI_NAPAD": return QuestionLayer.FIRST;
+            case "PANICNI_NAPAD": return QuestionLayer.SECOND;
+            case "PANICNI_POREMECAJ": return QuestionLayer.THIRD;
+            case "USLOVI_ZA_SOCIJALNU_ANKSIOZNOST": return QuestionLayer.FIRST;
+            case "SOCIJALNA_ANKSIOZNOST": return QuestionLayer.SECOND;
+            case "SOCIJALNA_FOBIJA": return QuestionLayer.THIRD;
             default: return QuestionLayer.FIRST;
         }
     }

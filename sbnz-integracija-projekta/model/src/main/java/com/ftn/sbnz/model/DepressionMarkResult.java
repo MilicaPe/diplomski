@@ -3,7 +3,6 @@ package com.ftn.sbnz.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.kie.api.definition.rule.All;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

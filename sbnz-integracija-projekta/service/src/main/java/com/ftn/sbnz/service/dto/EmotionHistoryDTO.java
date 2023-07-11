@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class EmotionHistoryDTO {
     private long id;
     private LocalDateTime time;
-    private DetectionType detectionType;
+    private String detectionType;
     private boolean emotion;
 
     public EmotionHistoryDTO(Result emotionResult) {

@@ -13,8 +13,8 @@ export class QuestionService {
 
   constructor(private httpClient:HttpClient) { }
 
-  getQuestionSet(layer:string, type:string) : Observable<PaginationDto> {
-    return this.httpClient.get<PaginationDto>(`${this.path}/${layer}/${type}`);
+  getQuestionSet(layer:string, type:string[]) : Observable<PaginationDto> {
+    return this.httpClient.post<PaginationDto>(`${this.path}/${layer}`, type);
   }
 
   getDepressionQuestionSet() : Observable<QuestionDto[]> {

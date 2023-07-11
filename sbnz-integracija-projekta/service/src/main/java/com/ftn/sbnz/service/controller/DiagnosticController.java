@@ -1,11 +1,6 @@
 package com.ftn.sbnz.service.controller;
 
-import com.ftn.sbnz.model.DetectionType;
-import com.ftn.sbnz.model.helper.DepressionMark;
-import com.ftn.sbnz.service.dto.AnswerDTO;
-import com.ftn.sbnz.service.dto.DepressionMarkDTO;
-import com.ftn.sbnz.service.dto.QuestionAnswerDTO;
-import com.ftn.sbnz.service.dto.ResultDTO;
+import com.ftn.sbnz.service.dto.*;
 import com.ftn.sbnz.service.dto.rules.RuleDTO;
 import com.ftn.sbnz.service.service.DiagnosticService;
 import com.ftn.sbnz.service.service.ResultService;
@@ -39,7 +34,7 @@ public class DiagnosticController {
 
     @GetMapping(value="diagnostic/get/sym/{symptom}")
     @PreAuthorize("hasAuthority('diagnostic_answer_get')")
-    public ResponseEntity<List<String>> back(@PathVariable DetectionType symptom){
+    public ResponseEntity<List<String>> back(@PathVariable String symptom){
         return new ResponseEntity<>(this.diagnosticService.back(symptom), HttpStatus.OK);
     }
 
@@ -55,6 +50,15 @@ public class DiagnosticController {
         List<DepressionMarkDTO> depressionMarksDTO = this.diagnosticService.depressionMark(loggedInUser);
         return new ResponseEntity<>(depressionMarksDTO, HttpStatus.OK);
     }
+
+    private String getLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return userDetails.getUsername();
+    }
+
+
+    /*  dodavanje pravila, moglo bi ovo biti novi kontroler  */
     @PostMapping(value="new/rules")
     public ResponseEntity<?> addNewRules(@RequestBody RuleDTO ruleDTO) throws IOException {
         System.out.println(" nova pravila ---");
@@ -68,10 +72,13 @@ public class DiagnosticController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-    private String getLoggedInUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return userDetails.getUsername();
+    @PostMapping(value = "new/template")
+    public ResponseEntity<?> addNewTemplateParam(@RequestBody List<TemplateParamDTO> templateParamDTOs) throws IOException {
+        System.out.println(" novi template ---");
+        this.diagnosticService.addTemplateRules(templateParamDTOs);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+
 }

@@ -10,13 +10,19 @@
   <div class="col-6 d-flex justify-content-end">
     <nav>
       <span>
-          <a [routerLink]="['psychologist/report']">
+          <a [routerLink]="['home']">
             <img class="img" src="assets/psychologist/report.png" alt="Izveštaji"
                  pTooltip="Izveštaji" tooltipPosition="left"/>
           </a>
       </span>
       <span>
-          <a [routerLink]="['psychologist/template']">
+          <a [routerLink]="['new/survey']">
+            <img class="img" src="assets/psychologist/question.jpg" alt="Dodaj pitanja"
+                 pTooltip="Dodaj pitanja" tooltipPosition="left"/>
+          </a>
+      </span>
+      <span>
+          <a [routerLink]="['template']">
             <img class="img" src="assets/psychologist/template.png" alt="Dodaj pravila"
                  pTooltip="Dodaj pravila" tooltipPosition="left"/>
           </a>
