@@ -10,6 +10,8 @@ import com.ftn.sbnz.service.dto.rules.RuleDTO;
 import com.ftn.sbnz.service.dto.rules.RuleParamDTO;
 import com.ftn.sbnz.service.repository.DepressionMarkResultRepository;
 import com.ftn.sbnz.service.repository.UserRepository;
+import com.ftn.sbnz.service.service.interfaces.DiagnosticService;
+import com.ftn.sbnz.service.service.interfaces.DiagnosticTemplateService;
 import org.drools.template.ObjectDataCompiler;
 import org.kie.api.builder.Message;
 import org.kie.api.builder.Results;
@@ -28,15 +30,15 @@ import java.util.*;
 
 @Service
 @Transactional
-public class DiagnosticService {
+public class DiagnosticServiceImpl implements DiagnosticService {
     @Autowired
-    private AnswerService answerService;
+    private AnswerServiceImpl answerService;
 
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
-    private ResultService resultService;
+    private ResultServiceImpl resultService;
 
     @Autowired
     private DepressionMarkResultRepository depressionMarkResultRepository;
@@ -50,7 +52,7 @@ public class DiagnosticService {
     private List<DiagnosticTemplate> templateRules;
     private Random rand;
     @Autowired
-    public DiagnosticService(KieContainer kieContainer, DiagnosticTemplateService diagnosticTemplateService) throws IOException {
+    public DiagnosticServiceImpl(KieContainer kieContainer, DiagnosticTemplateServiceImpl diagnosticTemplateService) throws IOException {
         this.rand = new Random();
         this.paths = new ArrayList<>();
         this.diagnosticTemplateService = diagnosticTemplateService;
@@ -61,7 +63,7 @@ public class DiagnosticService {
 
     }
 
-    public ArrayList<String> back(String symptomType) {
+    public ArrayList<String> getAllSymptoms(String diagnostic) {
 
         kieSession.insert(new DiagnosticState("USLOVI_ZA_ANKSIOZNOST", "ANKSIOZNOST"));
         kieSession.insert(new DiagnosticState("ANKSIOZNOST", "GENERALNI_ANKSIOZNI_POREMECAJ"));
@@ -72,7 +74,7 @@ public class DiagnosticService {
         kieSession.insert(new DiagnosticState("USLOVI_ZA_SOCIJALNU_ANKSIOZNOST", "SOCIJALNA_ANKSIOZNOST"));
         kieSession.insert(new DiagnosticState("SOCIJALNA_ANKSIOZNOST", "SOCIJALNA_FOBIJA"));
 
-        FactHandle symptom = kieSession.insert(symptomType);
+        FactHandle symptom = kieSession.insert(diagnostic);
         int fired = this.kieSession.fireAllRules();
         this.kieSession.delete(symptom);
 
@@ -97,7 +99,7 @@ public class DiagnosticService {
     }
 
 
-    public ResultDTO postAnswers(List<AnswerDTO> answers, String loggedInUser) throws IOException {
+    public ResultDTO getDiagnostics(List<AnswerDTO> answers, String loggedInUser) throws IOException {
         User user = this.userRepository.findByEmail(loggedInUser);//answers.get(0).getUserId()).orElseThrow(() -> new RuntimeException());
         FactHandle userFactHandle = kieSession.insert(user);
         List<FactHandle> factHandles = new ArrayList<>();
@@ -163,10 +165,10 @@ public class DiagnosticService {
         }
     }
 
-    public List<DepressionMarkDTO> depressionMark(String userEmail) {
+    public List<DepressionMarkDTO> getResultForDepressionMark(String userEmail) {
         User user = this.userRepository.findByEmail(userEmail);
         FactHandle userFactHandle = kieSession.insert(user);
-        List<Answer> answers = this.answerService.getAnswersByUserIdAndDate(user.getId());
+        List<Answer> answers = this.answerService.getAnswersByUserId(user.getId());
 
         List<FactHandle> factHandles = new ArrayList<>();
         factHandles.add(userFactHandle);
@@ -232,7 +234,7 @@ public class DiagnosticService {
 
     private KieSession createSession(boolean start) throws IOException {
 
-        String template1S = new File(".").getCanonicalPath() + "\\kjar\\src\\main\\resources\\rules\\diagnostics\\template.drt";
+        String template1S = new File(".").getCanonicalPath() + "\\kjar\\src\\main\\resources\\rules\\diagnostics\\diagnostic_template.drt";
         InputStream template = new FileInputStream(template1S);
 
         ObjectDataCompiler converter = new ObjectDataCompiler();
@@ -247,12 +249,12 @@ public class DiagnosticService {
         KieHelper kieHelper = new KieHelper();
         kieHelper.addContent(this.savedDrl, ResourceType.DRL);
         //  kieHelper.addContent(drl2, ResourceType.DRL);
-        String path = new File(".").getCanonicalPath() + "\\kjar\\src\\main\\resources\\rules\\diagnostics\\r1.drl";
+        String path = new File(".").getCanonicalPath() + "\\kjar\\src\\main\\resources\\rules\\diagnostics\\decision_rules.drl";
         InputStream r1 = new FileInputStream(path);
         String r1S = convertInputStreamToString(r1);
         kieHelper.addContent(r1S, ResourceType.DRL);
 
-        String path2 = new File(".").getCanonicalPath() + "\\kjar\\src\\main\\resources\\rules\\diagnostics\\backward.drl";
+        String path2 = new File(".").getCanonicalPath() + "\\kjar\\src\\main\\resources\\rules\\diagnostics\\backward_symptoms.drl";
         InputStream r2 = new FileInputStream(path2);
         String r2S = convertInputStreamToString(r2);
         kieHelper.addContent(r2S, ResourceType.DRL);
@@ -346,7 +348,6 @@ public class DiagnosticService {
 
 
     public void addTemplateRules(List<TemplateParamDTO> templateParamDTOs) throws IOException {
-        //  ovde nastavi dadjeee back dodavanje pravila ya template
         for(TemplateParamDTO dto: templateParamDTOs){
             DiagnosticTemplate diagnosticTemplate =   new DiagnosticTemplate();
             diagnosticTemplate.setType(dto.getDetection());
@@ -362,7 +363,6 @@ public class DiagnosticService {
         this.kieSession = this.createSession(false);
     }
 
-    //  sredi premestanje objekata iz stare u novu sesiju
     private KieSession moveObjectsToNewSession(KieSession newKieSession){
         Collection<Object> insertedObjects = (Collection<Object>) this.kieSession.getObjects();
         for(Object o : insertedObjects){

@@ -1,8 +1,7 @@
 package com.ftn.sbnz.service.controller;
 
 import com.ftn.sbnz.service.dto.UserDTO;
-import com.ftn.sbnz.service.dto.UserDetailsDTO;
-import com.ftn.sbnz.service.service.UserService;
+import com.ftn.sbnz.service.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

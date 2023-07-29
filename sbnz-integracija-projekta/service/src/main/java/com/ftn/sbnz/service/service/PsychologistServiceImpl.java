@@ -3,6 +3,7 @@ package com.ftn.sbnz.service.service;
 import com.ftn.sbnz.model.User;
 import com.ftn.sbnz.service.dto.PsychologistDTO;
 import com.ftn.sbnz.service.repository.UserRepository;
+import com.ftn.sbnz.service.service.interfaces.PsychologistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class PsychologistService {
+public class PsychologistServiceImpl implements PsychologistService {
 
     @Autowired
     private UserRepository userRepository;

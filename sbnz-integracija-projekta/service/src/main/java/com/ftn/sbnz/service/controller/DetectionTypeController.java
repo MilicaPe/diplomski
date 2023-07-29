@@ -1,8 +1,7 @@
 package com.ftn.sbnz.service.controller;
 
 import com.ftn.sbnz.service.dto.DetectionTypeDTO;
-import com.ftn.sbnz.service.repository.DetectionTypeRepository;
-import com.ftn.sbnz.service.service.DetectionTypeService;
+import com.ftn.sbnz.service.service.interfaces.DetectionTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

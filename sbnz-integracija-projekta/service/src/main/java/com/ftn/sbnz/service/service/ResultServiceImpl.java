@@ -6,6 +6,7 @@ import com.ftn.sbnz.service.dto.QuestionAnswerDTO;
 import com.ftn.sbnz.service.dto.ResultDTO;
 import com.ftn.sbnz.service.repository.AnswerRepository;
 import com.ftn.sbnz.service.repository.ResultRepository;
+import com.ftn.sbnz.service.service.interfaces.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class ResultService {
+public class ResultServiceImpl implements ResultService {
     @Autowired
     private ResultRepository resultRepository;
 

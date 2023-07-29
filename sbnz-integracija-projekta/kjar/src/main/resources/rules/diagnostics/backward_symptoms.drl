@@ -26,3 +26,11 @@ then
     System.out.println( "thing " + thing + " is in the GAd" );
     insert(thing);
 end
+
+//rule "naziv pravila"
+//// atributi: sailence, no-loop, agenda-group
+//when
+//    // Left-side
+//then
+//    // Right-side
+//end

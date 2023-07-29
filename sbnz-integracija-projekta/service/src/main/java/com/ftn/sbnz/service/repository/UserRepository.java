@@ -12,7 +12,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByEmail(String email);
 
-
     @Query("select u from users u where u.role.id = ?1")
     List<User> findByRoleId(Long id);
 
@@ -23,8 +22,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("select e from users e where e.gender=?1 and e.job=?2 and e.yearOfBirth>=?3 and e.yearOfBirth<=?4")
     List<User> findUsersByJobAAndGenderAndYearOfBirth(Gender g, String job, int start, int end);
-
-
-
 
 }

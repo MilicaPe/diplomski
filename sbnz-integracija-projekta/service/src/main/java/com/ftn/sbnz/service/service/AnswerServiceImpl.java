@@ -2,13 +2,12 @@ package com.ftn.sbnz.service.service;
 
 import com.ftn.sbnz.model.Answer;
 import com.ftn.sbnz.model.Question;
-import com.ftn.sbnz.model.QuestionLayer;
 import com.ftn.sbnz.model.User;
 import com.ftn.sbnz.service.dto.AnswerDTO;
 import com.ftn.sbnz.service.repository.AnswerRepository;
 import com.ftn.sbnz.service.repository.QuestionRepository;
+import com.ftn.sbnz.service.service.interfaces.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -18,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class AnswerService {
+public class AnswerServiceImpl implements AnswerService {
     @Autowired
     private AnswerRepository answerRepository;
 
@@ -36,7 +35,7 @@ public class AnswerService {
         return this.answerRepository.save(answer);
     }
 
-    public List<Answer> getAnswersByUserIdAndDate(long userId)
+    public List<Answer> getAnswersByUserId(long userId)
     {
         return this.answerRepository.findByUserIdAndDate(userId, LocalDate.now());
     }

@@ -7,8 +7,7 @@ import com.ftn.sbnz.service.dto.report.DetectionReportDTO;
 import com.ftn.sbnz.service.dto.report.DetectionReportParamDTO;
 import com.ftn.sbnz.service.dto.report.JobReportDTO;
 import com.ftn.sbnz.service.dto.report.JobReportParamDTO;
-import com.ftn.sbnz.service.service.ReportService;
-import net.bytebuddy.asm.Advice;
+import com.ftn.sbnz.service.service.interfaces.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.List;
 
 @RestController

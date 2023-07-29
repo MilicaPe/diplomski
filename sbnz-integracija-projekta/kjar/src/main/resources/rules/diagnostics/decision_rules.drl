@@ -12,7 +12,6 @@ import com.ftn.sbnz.model.helper.DiagnosticState;
 rule "transform-answer-diagnostic"
 no-loop
 agenda-group "transform-diagnostic"
-//salience 100
     when
         $a: FullAnswer(positive==false, $s: score)
     then
@@ -25,8 +24,6 @@ end
 
 rule "r1-ansksioznost"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
         $d: Diagnostic($uId: userId,
                         detectionType == "USLOVI_ZA_ANKSIOZNOST",
@@ -39,14 +36,11 @@ agenda-group "result-diagnostic"
         System.out.println(" Drugi slojjj");
         modify($d){setNextLayer(QuestionLayer.SECOND);}
         modify($d){setNextDetection("ANKSIOZNOST");}
-        //insert(new Diagnostic($uId, $intensity, "ANKSIOZNOST", QuestionLayer.FIRST, QuestionLayer.SECOND,  "Primeceni su uslovi za anksioznost. Naredni set pitanja će sadržati i pitanja o anksioznosti", false);)
 end
 
 
 rule "r2-anksioznost"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
         $d1: Diagnostic($uId: userId,
                             detectionType == "USLOVI_ZA_ANKSIOZNOST",
@@ -64,14 +58,11 @@ agenda-group "result-diagnostic"
         System.out.println(" Treci slojjj");
         modify($d2){ setNextLayer(QuestionLayer.THIRD);}
         modify($d2){ setNextDetection("GENERALNI_ANKSIOZNI_POREMECAJ");}
-
 end
 
 
 rule "r3-anksioznost"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
        $d1: Diagnostic($uId: userId,
                                 detectionType == "USLOVI_ZA_ANKSIOZNOST",
@@ -88,7 +79,6 @@ agenda-group "result-diagnostic"
     then
         System.out.println(" Final result");
         modify($d3){ setFinalResult(true);}
-       // insert(new NewQuestionnaire($uId, "ANKSIOZNOST", QuestionLayer.THIRD, "Dijagnostikovana je generalni anksiozni poremećaj.", true);)
 end
 
 
@@ -96,8 +86,6 @@ end
 
 rule "r1-panicni-napad"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
         $d: Diagnostic($uId: userId,
                         detectionType == "USLOVI_ZA_PANICNI_NAPAD",
@@ -110,14 +98,11 @@ agenda-group "result-diagnostic"
         System.out.println(" Drugi slojjj panicni napad");
         modify($d){ setNextLayer(QuestionLayer.SECOND);}
         modify($d){ setNextDetection("PANICNI_NAPAD");}
-        //insert(new Diagnostic($uId, $intensity, "PANICNI_NAPAD", QuestionLayer.FIRST ,QuestionLayer.SECOND, "Primeceni su uslovi za panični napad. Naredni set pitanja će sadržati i pitanja o paničnim napadima.", false);)
 end
 
 
 rule "r2-panicni-napad"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
         $d1: Diagnostic($uId: userId,
                             detectionType == "USLOVI_ZA_PANICNI_NAPAD",
@@ -135,14 +120,11 @@ agenda-group "result-diagnostic"
         System.out.println(" Treci slojjj panicni napad");
         modify($d2){ setNextLayer(QuestionLayer.THIRD);}
         modify($d2){ setNextDetection("PANICNI_POREMECAJ");}
-    //    insert(new Diagnostic($uId, $intensity, "PANICNI_NAPAD", QuestionLayer.SECOND, QuestionLayer.THIRD, "Dijagnostikovan je panični napad i naredni set pitanja će sadržati pitanja o paničnom poremećaju.", false);)
 end
 
 
 rule "r3-panicni-napad"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
        $d1: Diagnostic($uId: userId,
                                 detectionType == "USLOVI_ZA_PANICNI_NAPAD",
@@ -163,15 +145,12 @@ agenda-group "result-diagnostic"
     then
         System.out.println(" Final result panicni napad");
         modify($d3){ setFinalResult(true);}
-    //    insert(new Diagnostic($uId, $intensity, "PANICNI_NAPAD", QuestionLayer.THIRD, QuestionLayer.THIRD, "Dijagnostikovan je panični poremećaj.", true);)
 end
 
 
 
 rule "r1-socijalna-anksioznost"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
         $d: Diagnostic($uId: userId,
                         detectionType == "USLOVI_ZA_SOCIJALNU_ANKSIOZNOST",
@@ -184,14 +163,11 @@ agenda-group "result-diagnostic"
         System.out.println(" Drugi slojjj socijalna anksioznost");
         modify($d){setNextLayer(QuestionLayer.SECOND);}
         modify($d){ setNextDetection("SOCIJALNA_ANKSIOZNOST");}
-   //     insert(new Diagnostic($uId, $intensity, "SOCIJALNA_ANKSIOZNOST",  QuestionLayer.FIRST, QuestionLayer.SECOND, "Primeceni su uslovi za socijalnu anksioznost. Naredni set pitanja će sadržati i pitanja o socijalnoj anksioznosti", false);)
 end
 
 
 rule "r2-socijalna-anksioznost"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
         $d1: Diagnostic($uId: userId,
                             detectionType == "USLOVI_ZA_SOCIJALNU_ANKSIOZNOST",
@@ -209,14 +185,11 @@ agenda-group "result-diagnostic"
         System.out.println(" Treci slojjj socijalna anksioznost");
         modify($d2){setNextLayer(QuestionLayer.THIRD);}
         modify($d2){ setNextDetection("SOCIJALNA_FOBIJA");}
-  //      insert(new Diagnostic($uId, $intensity, "SOCIJALNA_ANKSIOZNOST", QuestionLayer.SECOND, QuestionLayer.THIRD, "Dijagnostikovana je socijalna anksioznost visokog stepena i naredni set pitanja će sadržati pitanja o socijalnoj fobiji.", false);)
 end
 
 
 rule "r3-socijalna-anksioznost"
 agenda-group "result-diagnostic"
-//salience 80
-
     when
        $d1: Diagnostic($uId: userId,
                                 detectionType == "USLOVI_ZA_SOCIJALNU_ANKSIOZNOST",
@@ -236,7 +209,6 @@ agenda-group "result-diagnostic"
     then
         System.out.println(" Final result socijalna anksioznost");
         modify($d3){setFinalResult(true);}
-    //    insert(new Diagnostic($uId, $intensity, "SOCIJALNA_ANKSIOZNOST", QuestionLayer.THIRD, QuestionLayer.THIRD, "Dijagnostikovana je socijalna fobija.", true);)
 end
 
 

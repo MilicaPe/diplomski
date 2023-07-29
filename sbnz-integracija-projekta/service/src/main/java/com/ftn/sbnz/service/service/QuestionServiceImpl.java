@@ -1,11 +1,11 @@
 package com.ftn.sbnz.service.service;
 
-import com.ftn.sbnz.model.DetectionType;
 import com.ftn.sbnz.model.Question;
 import com.ftn.sbnz.model.QuestionLayer;
 import com.ftn.sbnz.service.dto.QuestionDTO;
 import com.ftn.sbnz.service.dto.QuestionParamDTO;
 import com.ftn.sbnz.service.repository.QuestionRepository;
+import com.ftn.sbnz.service.service.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +15,12 @@ import java.util.List;
 
 @Service
 @Transactional
-public class QuestionService {
+public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private QuestionRepository questionRepository;
 
-    @Autowired DetectionTypeService detectionTypeService;
+    @Autowired
+    DetectionTypeServiceImpl detectionTypeService;
 
     public List<QuestionDTO> getQuestions(QuestionLayer questionLayer, List<String> detectionTypes){
         List<Question> questions = new ArrayList<>();
@@ -45,7 +46,7 @@ public class QuestionService {
         return formQuestionDTO(questions);
     }
 
-    public void addNew(List<QuestionParamDTO> questions) {
+    public void addNewQuestion(List<QuestionParamDTO> questions) {
         List<Question> newQuestions = new ArrayList<>();
         for(QuestionParamDTO questionParamDTO: questions){
             Question q = new Question();

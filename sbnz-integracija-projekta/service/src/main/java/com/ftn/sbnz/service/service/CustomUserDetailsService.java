@@ -21,7 +21,7 @@ import java.util.Set;
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     // Funkcija koja na osnovu username-a iz baze vraca objekat User-a
     @Override

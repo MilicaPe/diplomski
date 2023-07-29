@@ -3,11 +3,9 @@ package com.ftn.sbnz.service.controller;
 import com.ftn.sbnz.model.User;
 import com.ftn.sbnz.service.dto.LoginRequest;
 import com.ftn.sbnz.service.dto.RegisterRequestDTO;
-import com.ftn.sbnz.service.dto.SurveyDTO;
 import com.ftn.sbnz.service.dto.UserTokenState;
 import com.ftn.sbnz.service.repository.UserRepository;
-import com.ftn.sbnz.service.service.AuthService;
-import com.ftn.sbnz.service.service.UserService;
+import com.ftn.sbnz.service.service.UserServiceImpl;
 import com.ftn.sbnz.service.service.helper.FileService;
 import com.ftn.sbnz.service.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +37,7 @@ public class AuthController {
     private UserRepository userRepository;
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @Autowired
     private FileService fileService;

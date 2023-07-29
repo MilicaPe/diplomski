@@ -2,8 +2,8 @@ package com.ftn.sbnz.service.controller;
 
 import com.ftn.sbnz.service.dto.*;
 import com.ftn.sbnz.service.dto.rules.RuleDTO;
-import com.ftn.sbnz.service.service.DiagnosticService;
-import com.ftn.sbnz.service.service.ResultService;
+import com.ftn.sbnz.service.service.ResultServiceImpl;
+import com.ftn.sbnz.service.service.interfaces.DiagnosticService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,20 +22,20 @@ public class DiagnosticController {
     private DiagnosticService diagnosticService;
 
     @Autowired
-    private ResultService resultService;
+    private ResultServiceImpl resultService;
 
 
     @PostMapping(value="diagnostic/survey")
     @PreAuthorize("hasAuthority('diagnostic_answer_post')")
     public ResponseEntity<ResultDTO> postAnswers(@RequestBody List<AnswerDTO> answers) throws IOException {
         String loggedInUser = getLoggedInUser();
-        return new ResponseEntity<>(this.diagnosticService.postAnswers(answers, loggedInUser), HttpStatus.OK);
+        return new ResponseEntity<>(this.diagnosticService.getDiagnostics(answers, loggedInUser), HttpStatus.OK);
     }
 
     @GetMapping(value="diagnostic/get/sym/{symptom}")
     @PreAuthorize("hasAuthority('diagnostic_answer_get')")
     public ResponseEntity<List<String>> back(@PathVariable String symptom){
-        return new ResponseEntity<>(this.diagnosticService.back(symptom), HttpStatus.OK);
+        return new ResponseEntity<>(this.diagnosticService.getAllSymptoms(symptom), HttpStatus.OK);
     }
 
     @GetMapping(value="diagnostic/get/{id}")
@@ -47,7 +47,7 @@ public class DiagnosticController {
     @GetMapping(value = "diagnostic/depression/mark")
     public ResponseEntity<?> getDepressionMark(){
         String loggedInUser = getLoggedInUser();
-        List<DepressionMarkDTO> depressionMarksDTO = this.diagnosticService.depressionMark(loggedInUser);
+        List<DepressionMarkDTO> depressionMarksDTO = this.diagnosticService.getResultForDepressionMark(loggedInUser);
         return new ResponseEntity<>(depressionMarksDTO, HttpStatus.OK);
     }
 

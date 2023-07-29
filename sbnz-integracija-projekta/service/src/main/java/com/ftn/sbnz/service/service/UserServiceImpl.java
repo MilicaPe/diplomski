@@ -9,6 +9,7 @@ import com.ftn.sbnz.service.exception.AlreadyInUseException;
 import com.ftn.sbnz.service.exception.NotFoundException;
 import com.ftn.sbnz.service.repository.RoleRepository;
 import com.ftn.sbnz.service.repository.UserRepository;
+import com.ftn.sbnz.service.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;

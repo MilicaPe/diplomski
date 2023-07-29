@@ -1,6 +1,6 @@
 package com.ftn.sbnz.service.controller;
 
-import com.ftn.sbnz.service.service.PsychologistService;
+import com.ftn.sbnz.service.service.interfaces.PsychologistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

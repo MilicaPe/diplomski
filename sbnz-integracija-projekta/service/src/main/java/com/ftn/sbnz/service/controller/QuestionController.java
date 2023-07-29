@@ -5,7 +5,7 @@ import com.ftn.sbnz.service.dto.PaginationDTO;
 import com.ftn.sbnz.service.dto.QuestionDTO;
 import com.ftn.sbnz.service.dto.QuestionParamDTO;
 import com.ftn.sbnz.service.repository.DetectionTypeRepository;
-import com.ftn.sbnz.service.service.QuestionService;
+import com.ftn.sbnz.service.service.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +48,7 @@ public class QuestionController {
     @PostMapping(value = "question/add")
     public ResponseEntity<?> addNewQuestions(@RequestBody @Valid List<QuestionParamDTO> questions){
         System.out.println("////// add question /////");
-        this.questionService.addNew(questions);
+        this.questionService.addNewQuestion(questions);
         return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }

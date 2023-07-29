@@ -4,6 +4,7 @@ import com.ftn.sbnz.model.DetectionType;
 import com.ftn.sbnz.model.DetectionTypeGroup;
 import com.ftn.sbnz.service.dto.DetectionTypeDTO;
 import com.ftn.sbnz.service.repository.DetectionTypeRepository;
+import com.ftn.sbnz.service.service.interfaces.DetectionTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class DetectionTypeService {
+public class DetectionTypeServiceImpl implements DetectionTypeService {
     @Autowired
     private DetectionTypeRepository detectionTypeRepository;
 

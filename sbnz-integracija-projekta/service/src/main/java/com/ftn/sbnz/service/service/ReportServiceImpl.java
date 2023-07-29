@@ -10,6 +10,7 @@ import com.ftn.sbnz.service.dto.report.JobReportDTO;
 import com.ftn.sbnz.service.dto.report.JobReportParamDTO;
 import com.ftn.sbnz.service.repository.ResultRepository;
 import com.ftn.sbnz.service.repository.UserRepository;
+import com.ftn.sbnz.service.service.interfaces.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.util.*;
 
 @Service
 @Transactional
-public class ReportService {
+public class ReportServiceImpl implements ReportService {
     @Autowired
     private ResultRepository resultRepository;
 
