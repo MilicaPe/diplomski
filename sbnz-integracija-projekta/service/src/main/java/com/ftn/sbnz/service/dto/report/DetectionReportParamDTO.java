@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DetectionReportParamDTO {
-    private DetectionType detection;
+    private String detection;
     private String startDate;
     private String endDate;
 }

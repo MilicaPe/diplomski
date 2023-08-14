@@ -42,16 +42,25 @@ public class ReportServiceImpl implements ReportService {
         return this.resultRepository.countByUserId(userId);
     }
 
+    private boolean isPsychologistHasPermissionForUser(User user, String loggedInUser){
+        for(User u : user.getPsychologists()){
+            if (u.getEmail().equals(loggedInUser))
+                return true;
+        }
+        return false;
+    }
 
-    public List<JobReportDTO> getJobReport(JobReportParamDTO params) {
+    public List<JobReportDTO> getJobReport(JobReportParamDTO params, String loggedInUser) {
         List<User> users = filterUsers(params);
         List<Result> result = new ArrayList<>();
         for(User u :users){
-            result.addAll(u.getResults());
+            if (isPsychologistHasPermissionForUser(u, loggedInUser))
+                result.addAll(u.getResults());
         }
         return formJobReport(result);
 
     }
+
 
     private List<JobReportDTO> formJobReport(List<Result> result){
         Map<String, Integer> res = new HashMap<>();
@@ -85,10 +94,22 @@ public class ReportServiceImpl implements ReportService {
         return users;
     }
 
-    public DetectionReportDTO getDetectionTimeReport(DetectionType detection, LocalDateTime start, LocalDateTime end){
+    public DetectionReportDTO getDetectionTimeReport(String detection, LocalDateTime start, LocalDateTime end, String loggedInUser){
         List<Result> results = this.resultRepository.findAllByDetectedAndTime(detection, start, end);
-        return formDetectionReport(results);
+        return formDetectionReport(filterResultsByPermission(results, loggedInUser));
       //  return null;
+    }
+    List<Result> filterResultsByPermission(List<Result> results, String loggedInUser){
+        List<Result> filtered = new ArrayList<>();
+        for(Result r : results){
+            List<User> psychologists =  r.getUser().getPsychologists();
+            for(User u : psychologists){
+                if (u.getEmail().equals(loggedInUser))
+                    filtered.add(r);
+            }
+
+        }
+        return filtered;
     }
 
     private DetectionReportDTO formDetectionReport (List<Result> result){
@@ -102,10 +123,19 @@ public class ReportServiceImpl implements ReportService {
                 res.put(keyValue, 1);
             }
         }
-        List<String> keyList = new ArrayList<>(res.keySet());
-        List<Integer> valueList = new ArrayList<>(res.values());
-        return new DetectionReportDTO(valueList, keyList);
+        return getDetectionReportFromMap(res, result);
+    }
 
+    private DetectionReportDTO getDetectionReportFromMap(Map<String, Integer> resultMap, List<Result> results){
+        List<String> keyList = new ArrayList<>();
+        List<Integer> valueList = new ArrayList<>();
+        for(Result r: results){
+            String date = formDateString(r.getTime());
+            Integer count = resultMap.get(date);
+            keyList.add(date);
+            valueList.add(count);
+        }
+        return new DetectionReportDTO(valueList, keyList);
     }
 
     private String formDateString(LocalDateTime time){

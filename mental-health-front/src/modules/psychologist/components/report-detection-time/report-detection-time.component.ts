@@ -13,10 +13,11 @@ import {MessageService} from "primeng/api";
 })
 export class ReportDetectionTimeComponent implements OnInit{
 
-  detections=['SAD', 'DISGUSTED', 'ANGRY', 'FEARFUL', 'BAD', 'SURPRISED',
-              'HAPPY', 'USLOVI_ZA_ANKSIOZNOST', 'ANKSIOZNOST', 'GENERALNI_ANKSIOZNI_POREMECAJ',
+  detections=[
+    // 'SAD', 'DISGUSTED', 'ANGRY', 'FEARFUL', 'BAD', 'SURPRISED', 'HAPPY',
+              'USLOVI_ZA_ANKSIOZNOST', 'ANKSIOZNOST', 'GENERALNI_ANKSIOZNI_POREMECAJ',
               'USLOVI_ZA_PANICNI_NAPAD', 'PANICNI_NAPAD', 'PANICNI_POREMECAJ',
-              'USLOVI_ZA_SOCIJAlNU_ANKSIOZNOST', 'SOCIJALNA_ANKSIOZNOST', 'SOCIJALNA_FOBIJA']
+              'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST', 'SOCIJALNA_ANKSIOZNOST', 'SOCIJALNA_FOBIJA']
 
   param:DetectionReportParam={detection:"", endDate:null, startDate:null}
 

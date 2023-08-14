@@ -15,7 +15,9 @@ public class DiagnosticTemplateServiceImpl implements DiagnosticTemplateService 
     @Autowired
     private DiagnosticTemplateRepository diagnosticTemplateRepository;
 
-    public List<DiagnosticTemplate> getAll(){
+    public List<DiagnosticTemplate> getAllTemplates(){
+        List<DiagnosticTemplate> lista = this.diagnosticTemplateRepository.findAll();
+        System.out.println("podaci iy liste  :  " + lista.size());
         return this.diagnosticTemplateRepository.findAll();
     }
 

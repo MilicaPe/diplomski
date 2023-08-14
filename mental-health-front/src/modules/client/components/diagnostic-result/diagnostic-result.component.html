@@ -23,11 +23,10 @@
       <mat-divider></mat-divider>
       <br/>
       <br/>
-      <p [hidden]="!isFinal()"> Upitnik je završen.</p>
-      <button mat-stroked-button color="primary" [hidden]="!isFinal()" (click)="getDepressionMark()">
-        Rezultati za marker
-      </button>
+      <div [hidden]="!isFinal()">
+        <p [hidden]="!isFinal()"> Upitnik je završen.</p>
 
+      </div>
 
         <!--      <br/>-->
 <!--      <br/>-->

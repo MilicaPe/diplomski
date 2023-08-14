@@ -6,11 +6,12 @@
     <p-table class="table" [value]="historyList" [lazy]="true"
              (onLazyLoad)="nextPage($event)" [loading]="loading" [totalRecords]="totalRecords"
              [paginator]="true" [rows]="rowCount" [showCurrentPageReport]="true" #table
-             [currentPageReportTemplate]="'{currentPage} od {totalPages}'" [rowsPerPageOptions]="[1,2,5]">
+             [currentPageReportTemplate]="'{currentPage} od {totalPages}'" [rowsPerPageOptions]="[1, 5, 10]">
       <ng-template pTemplate="header">
         <tr>
           <th>Datum</th>
           <th>Dobijeno</th>
+          <th>Intenzitet</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-survey><!-- (click)="openDialog(client)"-->
@@ -27,6 +28,7 @@
             <img class="emotion" src="assets/client/emotions/happy-1.png" *ngIf="survey.detectionType == 'HAPPY'" alt="">
             {{survey.detectionType | emotionTypeToString | detectionTypeToString}}
           </td>
+          <td>{{survey.intensity|intensityToString}}</td>
         </tr>
       </ng-template>
     </p-table>

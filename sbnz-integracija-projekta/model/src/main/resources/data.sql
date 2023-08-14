@@ -277,7 +277,7 @@ insert into question(text, question_layer, detection_type_id, positive, depressi
 
 -- socijalna anksioznost, treci sloj
 
-insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Mnoge svakodnevne situacije koje uključuju prisustvo drugih ljudi, za mene predstavljaju ogroman stres.', 2, 9, true, false);  -- 85
+insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Mnoge svakodnevne situacije koje uključuju prisustvo drugih ljudi, za mene predstavljaju ogroman stres.', 2, 9, true, false);  -- 86
 insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Brinem da ću smoriti sagovornika.', 2, 9, true, true);
 insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Pre javnog nastupa mislim da ću povratiti.', 2, 9, true, false);
 insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Nikada ne jedem na javnom mestu.', 2, 9, true, false);
@@ -286,7 +286,7 @@ insert into question(text, question_layer, detection_type_id, positive, depressi
 insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Kada razgovaram sa šefom, glas mi se pretvori u pesak.', 2, 9, true, false);
 insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Nemam problem da koristim javni toalet.', 2, 9, false, false);
 insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Kontakt sa drugim ljudima mi predstavlja ogroman pritisak.', 2, 9, true, false);
-insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Gledam da po svaku cenu izbegnem sretanje drugih ljudi.', 2, 9, true, false);  -- 94
+insert into question(text, question_layer, detection_type_id, positive, depression_mark) values ('Gledam da po svaku cenu izbegnem sretanje drugih ljudi.', 2, 9, true, false);  -- 95
 
 
 --- 96 - 218
@@ -549,27 +549,30 @@ insert into users(role_id, name, surname, email, password, enabled, year_of_birt
     (2, 'Milica', 'Petrovic', 'mpetrovic764307@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 0, 'student');
 
 insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)
-values (2, 'Jovan', 'Jovanović', 'jj@ex.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 0, 'programer');
+values (2, 'Jovan', 'Jovanović', 'jovan@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 1, 'student');
 
 insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)
-values (1, 'Tamara', 'Konjevic', 'tamara@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 0, 'psiholog');
+values (1, 'Tamara', 'Konjevic', 'tamara@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 1999, 0, 'psiholog');
 
 insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)
-values (1, 'Mina', 'Minovic', 'mm@ex.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 0, 'psiholog');
+values (1, 'Milica', 'Okiljevic', 'milica@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 1980, 0, 'psiholog');
 insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)
-values (1, 'Luka', 'Lukic', 'll@ex.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 1, 'psiholog');
+values (1, 'Zorica', 'Lukic', 'zorica@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 1964, 0, 'psiholog');
 insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)
-values (1, 'Lazar', 'Lazarevic', 'llll@ex.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 1, 'psiholog');
+values (1, 'Lazar', 'Lazarevic', 'lazar@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 1976, 1, 'psiholog');
 insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)
-values (1, 'Lazar', 'Minovic', 'ml@ex.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 1, 'psiholog');
+values (1, 'Milos', 'Milosevic', 'milos@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2000, 1, 'psiholog');
 
 insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)values
-    (2, 'Ivan', 'Ivanovic', 'ivan@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 1996, 1, 'student');
+    (2, 'Pera', 'Peric', 'pera@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 1996, 1, 'student');
+insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)values
+    (2, 'Maša', 'Mašić', 'masa@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 2001, 0, 'pravnik');
+insert into users(role_id, name, surname, email, password, enabled, year_of_birth, gender, job)values
+    (2, 'Ivana', 'Ivanic', 'ivana@gmail.com', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', true, 1999, 0, 'tehnolog');
 
 
-insert into result(user_id, detected, time) values (2, 3, '2023-05-18 18:57:58.508-07');
+insert into result(user_id, detected, time, intensity) values (2, 'SAD', '2023-05-18 18:57:58.508-07', 2); -- 3
 
-insert into answer(user_id, question_id, score, time) values (2, 95, 4, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 96, 4, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 97, 4, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 98, 4, '2023-05-18 18:57:58.508-07');
@@ -605,7 +608,7 @@ insert into answer(user_id, question_id, score, time) values (2, 127, 4, '2023-0
 insert into answer(user_id, question_id, score, time) values (2, 128, 4, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 129, 4, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 130, 4, '2023-05-18 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (2, 131, 1, '2023-05-18 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (2, 131, 4, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 132, 1, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 133, 1, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 134, 1, '2023-05-18 18:57:58.508-07');
@@ -692,48 +695,53 @@ insert into answer(user_id, question_id, score, time) values (2, 214, 1, '2023-0
 insert into answer(user_id, question_id, score, time) values (2, 215, 1, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 216, 1, '2023-05-18 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (2, 217, 1, '2023-05-18 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (2, 218, 1, '2023-05-18 18:57:58.508-07');
 
 
+insert into user_psychologist(user_id, psychologist_id) values (1, 3);
 insert into user_psychologist(user_id, psychologist_id) values (2, 3);
+insert into user_psychologist(user_id, psychologist_id) values (8, 3);
+insert into user_psychologist(user_id, psychologist_id) values (9, 3);
+insert into user_psychologist(user_id, psychologist_id) values (10, 3);
 
 
-insert into result(user_id, detected, time) values (1, 10, '2023-05-20 18:57:58.508-07' );
-insert into result(user_id, detected, time) values (1, 12, '2023-05-21 18:57:58.508-07' );
-insert into result(user_id, detected, time) values (1, 14, '2023-05-22 18:57:58.508-07' );
-insert into result(user_id, detected, time) values (1, 2, '2023-05-23 18:57:58.508-07' );
-insert into result(user_id, detected, time) values (1, 15, '2023-05-24 18:57:58.508-07' );
+-- insert into result(user_id, detected, time) values (1, 'USLOVI_ZA_ANKSIOZNOST', '2023-05-20 18:57:58.508-07' );  --10
+-- insert into result(user_id, detected, time) values (1, 'USLOVI_ZA_PANICNI_NAPAD', '2023-05-21 18:57:58.508-07' );  -- 12
+insert into result(user_id, detected, time,  intensity) values (1, 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST', '2023-05-24 18:57:58.508-07', 4);  -- 14
+insert into result(user_id, detected, time,  intensity) values (1, 'SOCIJALNA_ANKSIOZNOST', '2023-05-24 18:57:58.508-07', 3);   -- 2
+insert into result(user_id, detected, time,  intensity) values (1, 'SOCIJALNA_FOBIJA', '2023-05-24 18:57:58.508-07', 2);  -- 15
 
-insert into answer(user_id, question_id, score, time) values (1, 1, 3, '2023-05-20 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 2, 4, '2023-05-20 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 3, 2, '2023-05-20 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 4, 5, '2023-05-20 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 5, 1, '2023-05-20 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 6, 3, '2023-05-20 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 1, 3, '2023-05-20 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 2, 4, '2023-05-20 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 3, 2, '2023-05-20 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 4, 5, '2023-05-20 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 5, 1, '2023-05-20 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 6, 3, '2023-05-20 18:57:58.508-07');
 
 
-insert into answer(user_id, question_id, score, time) values (1, 45, 3, '2023-05-21 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 46, 4, '2023-05-21 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 47, 2, '2023-05-21 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 48, 5, '2023-05-21 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 49, 1, '2023-05-21 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 50, 3, '2023-05-21 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 45, 3, '2023-05-21 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 46, 4, '2023-05-21 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 47, 2, '2023-05-21 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 48, 5, '2023-05-21 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 49, 1, '2023-05-21 18:57:58.508-07');
+-- insert into answer(user_id, question_id, score, time) values (1, 50, 3, '2023-05-21 18:57:58.508-07');
+--
+insert into answer(user_id, question_id, score, time) values (1, 72, 4, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 73, 5, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 74, 1, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 75, 2, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 76, 1, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 77, 5, '2023-05-24 18:57:58.508-07');
 
-insert into answer(user_id, question_id, score, time) values (1, 72, 4, '2023-05-22 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 73, 5, '2023-05-22 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 74, 1, '2023-05-22 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 75, 2, '2023-05-22 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 76, 1, '2023-05-22 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 77, 5, '2023-05-22 18:57:58.508-07');
-
-insert into answer(user_id, question_id, score, time) values (1, 78, 5, '2023-05-23 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 79, 5, '2023-05-23 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 80, 5, '2023-05-23 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 81, 2, '2023-05-23 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 82, 2, '2023-05-23 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 83, 4, '2023-05-23 18:57:58.508-07');
-insert into answer(user_id, question_id, score, time) values (1, 84, 4, '2023-05-23 18:57:58.508-07');
-
+insert into answer(user_id, question_id, score, time) values (1, 78, 5, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 79, 5, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 80, 5, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 81, 2, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 82, 2, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 83, 4, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 84, 4, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (1, 85, 4, '2023-05-24 18:57:58.508-07');
+
 insert into answer(user_id, question_id, score, time) values (1, 86, 5, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (1, 87, 5, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (1, 88, 4, '2023-05-24 18:57:58.508-07');
@@ -743,9 +751,11 @@ insert into answer(user_id, question_id, score, time) values (1, 91, 5, '2023-05
 insert into answer(user_id, question_id, score, time) values (1, 92, 1, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (1, 93, 4, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (1, 94, 5, '2023-05-24 18:57:58.508-07');
+insert into answer(user_id, question_id, score, time) values (1, 95, 5, '2023-05-24 18:57:58.508-07');
+
 
 -- dodati uslovi za cos ank za ivana za datume
-insert into result(user_id, detected, time) values (8, 10, '2023-05-20 18:57:58.508-07' );
+insert into result(user_id, detected, time, intensity) values (8, 'USLOVI_ZA_ANKSIOZNOST', '2023-05-20 18:57:58.508-07', 0);
 
 insert into answer(user_id, question_id, score, time) values (8, 1, 3, '2023-05-20 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (8, 2, 4, '2023-05-20 18:57:58.508-07');
@@ -754,7 +764,7 @@ insert into answer(user_id, question_id, score, time) values (8, 4, 5, '2023-05-
 insert into answer(user_id, question_id, score, time) values (8, 5, 1, '2023-05-20 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (8, 6, 3, '2023-05-20 18:57:58.508-07');
 
-insert into result(user_id, detected, time) values (8, 10, '2023-05-21 18:57:58.508-07' );
+insert into result(user_id, detected, time, intensity) values (8, 'USLOVI_ZA_ANKSIOZNOST', '2023-05-21 18:57:58.508-07', 1);
 
 insert into answer(user_id, question_id, score, time) values (8, 1, 3, '2023-05-21 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (8, 2, 4, '2023-05-21 18:57:58.508-07');
@@ -763,7 +773,7 @@ insert into answer(user_id, question_id, score, time) values (8, 4, 5, '2023-05-
 insert into answer(user_id, question_id, score, time) values (8, 5, 1, '2023-05-21 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (8, 6, 3, '2023-05-21 18:57:58.508-07');
 
-insert into result(user_id, detected, time) values (8, 10, '2023-05-24 18:57:58.508-07' );
+insert into result(user_id, detected, time, intensity) values (8, 'USLOVI_ZA_ANKSIOZNOST', '2023-05-24 18:57:58.508-07', 2);
 
 insert into answer(user_id, question_id, score, time) values (8, 1, 3, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (8, 2, 4, '2023-05-24 18:57:58.508-07');
@@ -771,3 +781,36 @@ insert into answer(user_id, question_id, score, time) values (8, 3, 2, '2023-05-
 insert into answer(user_id, question_id, score, time) values (8, 4, 5, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (8, 5, 1, '2023-05-24 18:57:58.508-07');
 insert into answer(user_id, question_id, score, time) values (8, 6, 3, '2023-05-24 18:57:58.508-07');
+
+
+-- podaci za izveštaje
+insert into result(user_id, detected, time, intensity) values (2, 'USLOVI_ZA_PANICNI_NAPAD', '2023-06-14 10:00:58.508-07', 2);
+insert into result(user_id, detected, time, intensity) values (2, 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST', '2023-06-14 10:00:58.508-07', 2);
+
+
+insert into result(user_id, detected, time, intensity) values (2, 'USLOVI_ZA_PANICNI_NAPAD', '2023-06-28 13:00:58.508-07', 4);
+insert into result(user_id, detected, time, intensity) values (2, 'PANICNI_NAPAD', '2023-06-28 13:00:58.508-07', 3);
+
+insert into result(user_id, detected, time, intensity) values (8, 'USLOVI_ZA_PANICNI_NAPAD', '2023-06-16 14:30:58.508-07', 1);
+insert into result(user_id, detected, time, intensity) values (8, 'USLOVI_ZA_ANKSIOZNOST', '2023-06-16 13:30:58.508-07', 3);
+insert into result(user_id, detected, time, intensity) values (8, 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST', '2023-06-16 13:30:58.508-07', 3);
+
+insert into result(user_id, detected, time, intensity) values (9, 'USLOVI_ZA_ANKSIOZNOST', '2023-06-16 13:30:58.508-07', 4);
+insert into result(user_id, detected, time, intensity) values (9, 'ANKSIOZNOST', '2023-06-16 13:30:58.508-07', 3);
+insert into result(user_id, detected, time, intensity) values (9, 'GENERALNI_ANKSIOZNI_POREMECAJ', '2023-06-16 14:30:58.508-07', 1);
+
+insert into result(user_id, detected, time, intensity) values (10, 'USLOVI_ZA_ANKSIOZNOST', '2023-06-16 19:30:58.508-07', 1);
+insert into result(user_id, detected, time, intensity) values (10, 'ANKSIOZNOST', '2023-06-16 19:30:58.508-07', 2);
+insert into result(user_id, detected, time, intensity) values (10, 'GENERALNI_ANKSIOZNI_POREMECAJ', '2023-06-16 19:30:58.508-07', 1);
+
+insert into result(user_id, detected, time, intensity) values (10, 'USLOVI_ZA_PANICNI_NAPAD', '2023-07-16 19:30:58.508-07', 2);
+insert into result(user_id, detected, time, intensity) values (10, 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST', '2023-07-16 19:30:58.508-07', 2);
+
+insert into result(user_id, detected, time, intensity) values (2, 'USLOVI_ZA_PANICNI_NAPAD', '2023-06-14 10:00:58.508-07', 2);
+insert into result(user_id, detected, time, intensity) values (2, 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST', '2023-06-14 10:00:58.508-07', 0);
+
+
+insert into result(user_id, detected, time,  intensity) values (1, 'USLOVI_ZA_SOCIJALNU_ANKSIOZNOST', '2023-08-02 18:57:58.508-07', 4);
+insert into result(user_id, detected, time,  intensity) values (1, 'SOCIJALNA_ANKSIOZNOST', '2023-08-02 18:57:58.508-07', 3);
+insert into result(user_id, detected, time,  intensity) values (1, 'SOCIJALNA_FOBIJA', '2023-08-02 18:57:58.508-07', 2);
+

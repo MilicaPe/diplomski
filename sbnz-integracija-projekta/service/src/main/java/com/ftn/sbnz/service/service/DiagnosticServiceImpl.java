@@ -23,6 +23,7 @@ import org.kie.internal.utils.KieHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.io.*;
 import java.time.LocalDateTime;
@@ -43,7 +44,7 @@ public class DiagnosticServiceImpl implements DiagnosticService {
     @Autowired
     private DepressionMarkResultRepository depressionMarkResultRepository;
 
-    private DiagnosticTemplateService diagnosticTemplateService;
+    private final DiagnosticTemplateService diagnosticTemplateService;
 
     private final KieContainer kieContainer;
     private KieSession kieSession;
@@ -52,19 +53,28 @@ public class DiagnosticServiceImpl implements DiagnosticService {
     private List<DiagnosticTemplate> templateRules;
     private Random rand;
     @Autowired
-    public DiagnosticServiceImpl(KieContainer kieContainer, DiagnosticTemplateServiceImpl diagnosticTemplateService) throws IOException {
+    public DiagnosticServiceImpl(KieContainer kieContainer, DiagnosticTemplateService diagnosticTemplateService) throws IOException {
         this.rand = new Random();
         this.paths = new ArrayList<>();
+        this.templateRules = new ArrayList<>();
         this.diagnosticTemplateService = diagnosticTemplateService;
-        this.templateRules = diagnosticTemplateService.getAll();
-        //this.createTemplateRules();
         this.kieContainer = kieContainer;
-        this.kieSession = this.createSession(true);
-
+        this.kieSession = null;
     }
 
-    public ArrayList<String> getAllSymptoms(String diagnostic) {
+    void makeSession() throws IOException {
+        if(this.kieSession==null) {
+            this.templateRules = diagnosticTemplateService.getAllTemplates();
+//        System.out.println(this.templateRules.get(0).getText());
+            this.kieSession = this.createSession(true);
+        }
+//        else{
+//            this.kieSession = this.createSession(false);
+//        }
+    }
 
+    public ArrayList<String> getAllSymptoms(String diagnostic) throws IOException {
+        this.makeSession();
         kieSession.insert(new DiagnosticState("USLOVI_ZA_ANKSIOZNOST", "ANKSIOZNOST"));
         kieSession.insert(new DiagnosticState("ANKSIOZNOST", "GENERALNI_ANKSIOZNI_POREMECAJ"));
 
@@ -100,6 +110,7 @@ public class DiagnosticServiceImpl implements DiagnosticService {
 
 
     public ResultDTO getDiagnostics(List<AnswerDTO> answers, String loggedInUser) throws IOException {
+        this.makeSession();
         User user = this.userRepository.findByEmail(loggedInUser);//answers.get(0).getUserId()).orElseThrow(() -> new RuntimeException());
         FactHandle userFactHandle = kieSession.insert(user);
         List<FactHandle> factHandles = new ArrayList<>();
@@ -131,6 +142,7 @@ public class DiagnosticServiceImpl implements DiagnosticService {
         ResultDTO result = this.getDiagnosticWithLayerFromSession(user.getId(), questionLayer);
         this.resultService.saveResult(result, user);
         this.deleteFinalResultFromSession();
+        if(analyseResultDTOIsLastLayer(result)){ this.deleteDiagnosticOfUserFromSession(user.getId());}
         System.out.println("result: " + result);
         return result;
     }
@@ -152,6 +164,26 @@ public class DiagnosticServiceImpl implements DiagnosticService {
         return new ResultDTO(diagnostics);
     }
 
+    private boolean analyseResultDTOIsLastLayer(ResultDTO resultDTO){
+        for(Diagnostic d: resultDTO.getDiagnostics()){
+            if (d.getQuestionLayer()!=QuestionLayer.THIRD){
+                return false;
+            }
+        }
+        return true;
+    }
+    private void deleteDiagnosticOfUserFromSession(Long userId){
+        Collection<Object> insertedObjects = (Collection<Object>) kieSession.getObjects();
+        for (Object insertedObject : insertedObjects) {
+            if (insertedObject instanceof Diagnostic) {
+                Diagnostic diagnostic = (Diagnostic) insertedObject;
+                if (diagnostic.getUserId()==userId) {
+                    FactHandle factHandle = kieSession.getFactHandle(insertedObject);
+                    kieSession.delete(factHandle);
+                }
+            }
+        }
+    }
     private void deleteFinalResultFromSession(){
         Collection<Object> insertedObjects = (Collection<Object>) kieSession.getObjects();
         for (Object insertedObject : insertedObjects) {
@@ -236,10 +268,14 @@ public class DiagnosticServiceImpl implements DiagnosticService {
 
         String template1S = new File(".").getCanonicalPath() + "\\kjar\\src\\main\\resources\\rules\\diagnostics\\diagnostic_template.drt";
         InputStream template = new FileInputStream(template1S);
-
+        System.out.println("icita drt");
+        System.out.println(template1S);
+     //   this.templateRules = this.diagnosticTemplateService.getAllTemplates();
+        System.out.println(this.templateRules.size());
         ObjectDataCompiler converter = new ObjectDataCompiler();
         String drl = converter.compile(this.templateRules, template);
 
+        System.out.println("Generisana pravila ");
         System.out.println(drl);
         this.savedDrl = drl;
         return this.createKieSessionFromDRL(start);
@@ -348,6 +384,7 @@ public class DiagnosticServiceImpl implements DiagnosticService {
 
 
     public void addTemplateRules(List<TemplateParamDTO> templateParamDTOs) throws IOException {
+        this.makeSession();
         for(TemplateParamDTO dto: templateParamDTOs){
             DiagnosticTemplate diagnosticTemplate =   new DiagnosticTemplate();
             diagnosticTemplate.setType(dto.getDetection());

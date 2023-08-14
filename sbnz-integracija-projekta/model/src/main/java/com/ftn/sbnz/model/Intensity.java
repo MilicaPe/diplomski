@@ -1,11 +1,13 @@
 package com.ftn.sbnz.model;
 
+import javax.persistence.criteria.CriteriaBuilder;
+
 public enum Intensity {
-    BLAGO(1),
-    UMERENO(2),
-    IZRAZENO(3),
-    TESKO(4),
-    DUBOKO(5);
+    BLAGO(0),
+    UMERENO(1),
+    IZRAZENO(2),
+    TESKO(3),
+    DUBOKO(4);
 
     private final int value;
 
@@ -15,13 +17,13 @@ public enum Intensity {
 
     public static Intensity valueOf(int value) {
         switch (value) {
-            case 5:
-                return Intensity.DUBOKO;
             case 4:
-                return Intensity.TESKO;
+                return Intensity.DUBOKO;
             case 3:
-                return Intensity.IZRAZENO;
+                return Intensity.TESKO;
             case 2:
+                return Intensity.IZRAZENO;
+            case 1:
                 return Intensity.UMERENO;
             default:
                 return Intensity.BLAGO;

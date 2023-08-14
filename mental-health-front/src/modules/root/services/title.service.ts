@@ -13,6 +13,9 @@ export class TitleService {
       case '/client/emotion': return 'Emocije'
       case '/client/psychologist': return 'Dodaj psihologa'
       case '/client/list': return 'Lista psihologa'
+      case '/psychologist/home': return 'Izveštaji'
+      case '/psychologist/template': return 'Dodavanje novog templejta'
+      case '/psychologist/new/survey': return 'Definisanje novih pitanja'
     }
     return '';
   }

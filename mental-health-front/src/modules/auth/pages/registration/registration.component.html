@@ -9,7 +9,7 @@
               <input type="text" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
                      id="email" placeholder="example@email.com">
               <mat-error *ngIf="emailFormControl.hasError('required')">
-                Email je <strong>potrebno</strong>
+                Email je <strong>potreban</strong>
               </mat-error>
               <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                 Ispravan format email-a: example@vimm.com
@@ -38,7 +38,7 @@
                 Ime je <strong>potrebno</strong>
               </mat-error>
               <mat-error *ngIf="nameFormControl.hasError('pattern') && !nameFormControl.hasError('required')">
-                Mora da počinje sa velikom slovom
+                Mora da počinje velikom slovom
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
@@ -61,7 +61,7 @@
                 Prezime je <strong>potrebno</strong>
               </mat-error>
               <mat-error *ngIf="surnameFormControl.hasError('pattern') && !surnameFormControl.hasError('required')">
-                Prezime da počinje sa velikom slovom
+                Prezime da počinje velikom slovom
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
@@ -74,7 +74,7 @@
                 Zanimanje je <strong>potrebno</strong>
               </mat-error>
               <mat-error *ngIf="jobFormControl.hasError('pattern') && !jobFormControl.hasError('required')">
-                Zanimanje sastoji od slova
+                Zanimanje se sastoji od slova
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
@@ -97,10 +97,10 @@
               <input type="number" matInput [formControl]="yearOfBirthFormControl" [errorStateMatcher]="matcher"
                      id="yearOfBirth" placeholder="2000">
               <mat-error *ngIf="yearOfBirthFormControl.hasError('required')">
-                Godina rođenja je <strong>potrebno</strong>
+                Godina rođenja je <strong>potrebna</strong>
               </mat-error>
               <mat-error *ngIf="yearOfBirthFormControl.hasError('pattern') && !yearOfBirthFormControl.hasError('required')">
-                Godina mora da sastoji od brojeva
+                Godina mora da bude broj
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
@@ -109,7 +109,7 @@
             <mat-form-field [hideRequiredMarker]="false">
               <input type="password" matInput [formControl]="passwordAgainFormControl" [errorStateMatcher]="matcher" placeholder="Ponovite lozinku">
               <mat-error *ngIf="!passwordAgainFormControl.hasError('required') && passwordAgainFormControl.hasError('wrongValue')">
-                Lozinke se ne preklapaju
+                Lozinke se ne poklapaju
               </mat-error>
               <mat-error *ngIf="passwordAgainFormControl.hasError('required')">
                 Lozinka je <strong>obavezna</strong>

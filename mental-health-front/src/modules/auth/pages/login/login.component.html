@@ -5,7 +5,7 @@
         <div class="panel border bg-white">
 
           <div class="panel-heading">
-            <h1 class="pt-3 font-weight-bold mt-2">Ulogujte se</h1>
+            <h1 class="pt-3 font-weight-bold mt-2">Prijavite se</h1>
           </div>
           <div class="panel-body p-3">
             <form [formGroup]="loginForm">
@@ -23,7 +23,7 @@
         loginForm.controls['email'].touched &&
         loginForm.hasError('required', 'email')
       " class="text-danger">
-                *Email je potrebno</small>
+                *Email je potreban</small>
               <small id="invalid-email" *ngIf="
         loginForm.controls['email'].touched &&
         loginForm.hasError('pattern', 'email')
@@ -60,16 +60,16 @@
 
               <button id="loginBtn" (click)="onLogin()" [disabled]="!loginForm.valid" type="submit"
                       class="btn btn-primary btn-block mt-4 w-100">
-                Ulogujte se
+                Prijavite se
               </button>
               <div class="text-center pt-4 text-muted">
-                Don't have account?
-                <a id="forget" routerLink="/auth/registration">Registrujte</a>
+                Nemate nalog?
+                <a id="forget" routerLink="/auth/registration">Registrujte se</a>
               </div>
             </form>
           </div>
           <div class="text-center text-muted">
-            Nazad na <a id="forget" routerLink="/user">počtnu stranicu</a>
+            Nazad na <a id="forget" routerLink="/auth/login">počtnu stranicu</a>
           </div>
 
           <p-toast position="top-right" key="vimm-message"></p-toast>

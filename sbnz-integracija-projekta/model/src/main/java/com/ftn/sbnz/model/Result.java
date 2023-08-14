@@ -26,10 +26,19 @@ public class Result {
 
     private LocalDateTime time;
 
+    private Intensity intensity;
+
     public Result(User user, String detected, LocalDateTime time) {
         this.user = user;
         this.detected = detected;
         this.time = time;
+    }
+
+    public Result(User user, String detected, LocalDateTime time, Intensity intensity) {
+        this.user = user;
+        this.detected = detected;
+        this.time = time;
+        this.intensity = intensity;
     }
 
     public boolean isEmotion() {

@@ -19,7 +19,6 @@ import com.ftn.sbnz.model.helper.Diagnostic;
 template "templ-1"
 rule "Diagnostic_@{row.rowNumber}"
 agenda-group "first-diagnostic"
-//salience 90
 
 when
     $u: User($uId: id)

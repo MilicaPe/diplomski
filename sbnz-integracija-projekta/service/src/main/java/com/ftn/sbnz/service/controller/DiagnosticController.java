@@ -1,9 +1,11 @@
 package com.ftn.sbnz.service.controller;
 
+import com.ftn.sbnz.model.DiagnosticTemplate;
 import com.ftn.sbnz.service.dto.*;
 import com.ftn.sbnz.service.dto.rules.RuleDTO;
 import com.ftn.sbnz.service.service.ResultServiceImpl;
 import com.ftn.sbnz.service.service.interfaces.DiagnosticService;
+import com.ftn.sbnz.service.service.interfaces.DiagnosticTemplateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +36,7 @@ public class DiagnosticController {
 
     @GetMapping(value="diagnostic/get/sym/{symptom}")
     @PreAuthorize("hasAuthority('diagnostic_answer_get')")
-    public ResponseEntity<List<String>> back(@PathVariable String symptom){
+    public ResponseEntity<List<String>> back(@PathVariable String symptom) throws IOException {
         return new ResponseEntity<>(this.diagnosticService.getAllSymptoms(symptom), HttpStatus.OK);
     }
 

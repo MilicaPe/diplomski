@@ -13,7 +13,7 @@ import java.util.List;
 public interface ReportService {
     List<EmotionHistoryDTO> getUsersDetections(long userId, PageRequest of);
     long getUsersDetections(long userId);
-    List<JobReportDTO> getJobReport(JobReportParamDTO params);
-    DetectionReportDTO getDetectionTimeReport(DetectionType detection, LocalDateTime start, LocalDateTime end);
+    List<JobReportDTO> getJobReport(JobReportParamDTO params, String loggedInUser);
+    DetectionReportDTO getDetectionTimeReport(String detection, LocalDateTime start, LocalDateTime end, String loggedInUser);
 
 }

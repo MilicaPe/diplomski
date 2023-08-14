@@ -184,9 +184,12 @@ public class EmotionService {
         return result;
     }
 
-    public List<EmotionHistoryDTO> getAllEmotions(PageRequest of, String loggedInUser) {
+    public List<EmotionHistoryDTO> getAllEmotions(PageRequest of, String userEmail) {
 //        User user = this.userRepository.findByEmail(loggedInUser);
-        return convertToEmotionHistoryDTO(this.resultRepository.findByEmail(loggedInUser, of));
+        System.out.println(userEmail);
+        List<Result> res = this.resultRepository.findByEmail(userEmail, of);
+        System.out.println(res.size());
+        return convertToEmotionHistoryDTO(this.resultRepository.findByEmail(userEmail, of));
     }
 
     private List<EmotionHistoryDTO> convertToEmotionHistoryDTO(List<Result> emotionResultList) {
@@ -230,13 +233,13 @@ public class EmotionService {
 //            result.add();
         }
         List<QuestionAnswerByEmotionDTO> result = new ArrayList<>();
-        result.add(new QuestionAnswerByEmotionDTO(resultSad, detectionTypeRepository.getDetectionTypeByType("SAD")));
-        result.add(new QuestionAnswerByEmotionDTO(resultAngry, detectionTypeRepository.getDetectionTypeByType("ANGRY")));
-        result.add(new QuestionAnswerByEmotionDTO(resultBad, detectionTypeRepository.getDetectionTypeByType("BAD")));
-        result.add(new QuestionAnswerByEmotionDTO(resultHappy, detectionTypeRepository.getDetectionTypeByType("HAPPY")));
-        result.add(new QuestionAnswerByEmotionDTO(resultDisgusted, detectionTypeRepository.getDetectionTypeByType("DISGUSTED")));
-        result.add(new QuestionAnswerByEmotionDTO(resultFearful, detectionTypeRepository.getDetectionTypeByType("FEARFUL")));
-        result.add(new QuestionAnswerByEmotionDTO(resultSurprised, detectionTypeRepository.getDetectionTypeByType("SURPRISED")));
+        result.add(new QuestionAnswerByEmotionDTO(resultSad, detectionTypeRepository.getDetectionTypeByType("SAD").getType()));
+        result.add(new QuestionAnswerByEmotionDTO(resultAngry, detectionTypeRepository.getDetectionTypeByType("ANGRY").getType()));
+        result.add(new QuestionAnswerByEmotionDTO(resultBad, detectionTypeRepository.getDetectionTypeByType("BAD").getType()));
+        result.add(new QuestionAnswerByEmotionDTO(resultHappy, detectionTypeRepository.getDetectionTypeByType("HAPPY").getType()));
+        result.add(new QuestionAnswerByEmotionDTO(resultDisgusted, detectionTypeRepository.getDetectionTypeByType("DISGUSTED").getType()));
+        result.add(new QuestionAnswerByEmotionDTO(resultFearful, detectionTypeRepository.getDetectionTypeByType("FEARFUL").getType()));
+        result.add(new QuestionAnswerByEmotionDTO(resultSurprised, detectionTypeRepository.getDetectionTypeByType("SURPRISED").getType()));
 
         return result;
     }

@@ -5,6 +5,6 @@ import com.ftn.sbnz.model.DiagnosticTemplate;
 import java.util.List;
 
 public interface DiagnosticTemplateService {
-    List<DiagnosticTemplate> getAll();
+    List<DiagnosticTemplate> getAllTemplates();
     DiagnosticTemplate save(DiagnosticTemplate diagnosticTemplate);
 }

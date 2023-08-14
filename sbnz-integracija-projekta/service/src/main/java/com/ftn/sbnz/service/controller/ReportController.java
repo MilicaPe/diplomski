@@ -14,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -40,7 +43,7 @@ public class ReportController {
     @PostMapping(value = "job/age/gender")
     @PreAuthorize("hasAuthority('report_job')")
     public ResponseEntity<List<JobReportDTO>> getReportForJobAge(@RequestBody JobReportParamDTO params){
-        List<JobReportDTO> report = this.reportService.getJobReport(params);
+        List<JobReportDTO> report = this.reportService.getJobReport(params, getLoggedInUser());
         return new ResponseEntity<>(report, HttpStatus.OK);
     }
 
@@ -52,7 +55,7 @@ public class ReportController {
         LocalDateTime startDate = getDateTime(detectionReportParamDTO.getStartDate());
         LocalDateTime endDate = getDateTime(detectionReportParamDTO.getEndDate());
 
-        DetectionReportDTO detectionReportDTO = this.reportService.getDetectionTimeReport(detectionReportParamDTO.getDetection(), startDate, endDate);
+        DetectionReportDTO detectionReportDTO = this.reportService.getDetectionTimeReport(detectionReportParamDTO.getDetection(), startDate, endDate, getLoggedInUser());
 
         return new ResponseEntity(detectionReportDTO, HttpStatus.OK);
     }
@@ -64,4 +67,11 @@ public class ReportController {
         LocalDateTime date = LocalDateTime.parse(datePart, formatter);
         return date.plusDays(1);
     }
+
+    private String getLoggedInUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return userDetails.getUsername();
+    }
+
 }

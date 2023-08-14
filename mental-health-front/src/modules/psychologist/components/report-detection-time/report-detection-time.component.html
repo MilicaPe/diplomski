@@ -1,43 +1,44 @@
-<div class="row">
-  <div class="=col-3">
+<div>
+  <div class="row">
+    <div class="=col-3">
+    </div>
+
+    <div class="col-3">
+      <mat-form-field>
+        <mat-label>Odaberite emociju/stanje</mat-label>
+        <mat-select [(ngModel)]="this.param.detection" name="detect">
+          <mat-option *ngFor="let detect of detections" [value]="detect">
+            {{detect|detectionTypeToString}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="col-3">
+
+      <mat-form-field>
+        <mat-label>Unesite vremenski opseg</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Početni datum" [(ngModel)]="param.startDate">
+          <input matEndDate placeholder="Krajnji datum" [(ngModel)]="param.endDate">
+        </mat-date-range-input>
+        <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+    </div>
+
+    <div class="col-2">
+      <button mat-raised-button color="primary" (click)="getDetectionReport()">Prikaži</button>
+    </div>
   </div>
 
-  <div class="col-3">
-    <mat-form-field>
-      <mat-label>Odaberite emociju/stanje</mat-label>
-      <mat-select [(ngModel)]="this.param.detection" name="detect">
-        <mat-option *ngFor="let detect of detections" [value]="detect">
-          {{detect|detectionTypeToString}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-
-  <div class="col-3">
-
-    <mat-form-field>
-      <mat-label>Unesite vremenski opseg</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate placeholder="Početni datum" [(ngModel)]="param.startDate">
-        <input matEndDate placeholder="Krajnji datum" [(ngModel)]="param.endDate">
-      </mat-date-range-input>
-      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
-    </mat-form-field>
-  </div>
-
-  <div class="col-2">
-    <button mat-raised-button color="primary" (click)="getDetectionReport()">Prikaži</button>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-2"></div>
-  <div class="col-10">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
       <p-chart type="line" [data]="data"></p-chart>
+    </div>
   </div>
 </div>
-
 <p-toast position="top-right" key="vimm-report-detection"></p-toast>
 

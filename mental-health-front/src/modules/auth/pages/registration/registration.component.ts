@@ -69,7 +69,7 @@ export class RegistrationComponent {
         if (result)
           this.messageService.add({
             key: 'vimm-message',
-            severity: 'info',
+            severity: 'success',
             summary: 'Uspešno ste poslali zahtev',
             detail: 'Ulogujte se u našu aplikaciju'
           })

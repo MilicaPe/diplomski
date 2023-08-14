@@ -4,11 +4,13 @@ import com.ftn.sbnz.model.Answer;
 import com.ftn.sbnz.model.QuestionLayer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
     @Query("select a from Answer a where a.user.id = ?1 and a.time = ?2")
     List<Answer> findByUserIdAndTime(Long id, LocalDateTime time);

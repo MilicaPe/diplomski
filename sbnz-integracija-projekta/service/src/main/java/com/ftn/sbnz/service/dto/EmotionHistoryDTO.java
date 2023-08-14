@@ -17,12 +17,14 @@ public class EmotionHistoryDTO {
     private LocalDateTime time;
     private String detectionType;
     private boolean emotion;
+    private String intensity;
 
-    public EmotionHistoryDTO(Result emotionResult) {
-        this.id = emotionResult.getId();
-        this.time = emotionResult.getTime();
-        this.detectionType = emotionResult.getDetected();
-        this.emotion = emotionResult.isEmotion();
+    public EmotionHistoryDTO(Result result) {
+        this.id = result.getId();
+        this.time = result.getTime();
+        this.detectionType = result.getDetected();
+        this.emotion = result.isEmotion();
+        if(result.getIntensity() != null)  {this.intensity = result.getIntensity().toString();}
     }
     /*
 

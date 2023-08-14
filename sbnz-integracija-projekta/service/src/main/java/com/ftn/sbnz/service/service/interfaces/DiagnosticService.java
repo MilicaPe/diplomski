@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public interface DiagnosticService {
-    ArrayList<String> getAllSymptoms(String diagnostic);
+    ArrayList<String> getAllSymptoms(String diagnostic) throws IOException;
     ResultDTO getDiagnostics(List<AnswerDTO> answers, String loggedInUser)  throws IOException;
     List<DepressionMarkDTO> getResultForDepressionMark(String userEmail);
     String makeNewRules(RuleDTO ruleDTO)  throws IOException;

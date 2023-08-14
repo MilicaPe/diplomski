@@ -1,6 +1,7 @@
 package com.ftn.sbnz.service.dto;
 
 import com.ftn.sbnz.model.DetectionType;
+import com.ftn.sbnz.model.Intensity;
 import com.ftn.sbnz.model.Result;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,3 +1,4 @@
+<div class="marginBorder row contain">
 <div class="row" style="margin: 5px">
   <div class="col-4">
   </div>
@@ -18,7 +19,7 @@
 </div>
 
 
-<div >
+<div class="table-container" style="margin-bottom: 130px">
 
   <p-table class="table" [value]="historyList" [lazy]="true"
            (onLazyLoad)="nextPage($event)" [loading]="loading" [totalRecords]="totalRecords"
@@ -27,7 +28,8 @@
     <ng-template pTemplate="header">
       <tr>
         <th>Datum</th>
-        <th>Dobijeno</th>
+        <th>Stanje</th>
+        <th>Intenzitet</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-survey><!-- (click)="openDialog(client)"-->
@@ -47,9 +49,12 @@
           -->
           {{survey.detectionType | detectionTypeToString}}
         </td>
+        <td>{{survey.intensity|intensityToString}}</td>
       </tr>
     </ng-template>
   </p-table>
 </div>
-<p-toast position="top-right" key="vimm-report-user"></p-toast>
+</div>
+
+<!--<p-toast position="top-right" key="vimm-report-user"></p-toast>-->
 

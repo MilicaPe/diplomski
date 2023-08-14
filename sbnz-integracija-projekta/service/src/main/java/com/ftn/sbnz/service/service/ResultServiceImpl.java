@@ -27,7 +27,7 @@ public class ResultServiceImpl implements ResultService {
 
     public void saveResult(ResultDTO result, User user) {
         for (Diagnostic diagnostic : result.getDiagnostics()) {
-            this.resultRepository.save(new Result(user, diagnostic.getDetectionType(), LocalDateTime.now()));
+            this.resultRepository.save(new Result(user, diagnostic.getDetectionType(), LocalDateTime.now(), diagnostic.getIntensity()));
 
         }
     }

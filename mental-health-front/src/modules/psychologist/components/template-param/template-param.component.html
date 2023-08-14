@@ -1,5 +1,5 @@
 <div class="row m-2">
-
+  <div class="col-2"></div>
   <div class="col-2">
     <mat-form-field appearance="fill">
       <mat-label>Dijagnoza</mat-label>
@@ -41,6 +41,7 @@
 </div>
 
 <div class="row m-2">
+  <div class="col-2"></div>
   <div class="col-2">
     <mat-form-field appearance="fill">
       <mat-label>Nivo ozbiljnosti</mat-label>
@@ -55,7 +56,7 @@
   </div>
 
 
-  <div class="col-3" [formGroup]="formGroup">
+  <div class="col-2" [formGroup]="formGroup">
     <mat-form-field>
       <mat-label>Poruka</mat-label>
       <textarea matInput name="questionText" required formControlName="textFormControl" (ngModelChange)="check()"
@@ -72,7 +73,7 @@
   </div>
 
 
-  <div class="col-4">
+  <div class="col-2">
     <p>Da li je krajnji rezultat?</p>
     <mat-radio-group aria-label="Da li je krajnji rezultat?" [(ngModel)]="templateRuleParam.finalResult">
       <mat-radio-button value=true>Da</mat-radio-button>

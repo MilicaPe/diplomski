@@ -4,6 +4,7 @@ import {EmotionService} from "../../../client/services/emotion/emotion.service";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {QuestionAnswerDto} from "../../../client/model/question-answer-dto";
 import {DiagnosticService} from "../../../client/services/diagnostic-service/diagnostic.service";
+import {EmotionHistoryDto} from "../../../client/model/emotion-history-dto";
 
 @Component({
   selector: 'app-diagnostic-survey-overview',
@@ -15,10 +16,10 @@ export class DiagnosticSurveyOverviewComponent {
 
   constructor(private answerService: DiagnosticService,
               public dialogRef: MatDialogRef<DiagnosticSurveyOverviewComponent>,
-              @Inject(MAT_DIALOG_DATA) public id: number) {
-    this.answerService.getAnswers(id).subscribe(
+              @Inject(MAT_DIALOG_DATA) public emotionHistoryDto: EmotionHistoryDto) {
+    this.answerService.getAnswers(emotionHistoryDto.id).subscribe(
       res => {
-        this.answers = res
+        this.answers = res  /////skhvskhv
         console.log("RESULT")
         console.log(res)
       }

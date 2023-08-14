@@ -78,7 +78,7 @@ export class UserReportComponent implements OnInit {
       const dialogRef = this.dialog.open(EmotionSurveyOverviewComponent, {
         width: '70%',
         height: '95%',
-        data: dto.id
+        data: dto
       })
       dialogRef.afterClosed().subscribe(() => {
         console.log('The dialog was closed')
@@ -87,7 +87,7 @@ export class UserReportComponent implements OnInit {
       const dialogRef = this.dialog.open(DiagnosticSurveyOverviewComponent, {
         width: '70%',
         height: '95%',
-        data: dto.id
+        data: dto
       })
       dialogRef.afterClosed().subscribe(() => {
         console.log('The dialog was closed')

@@ -14,9 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 public class QuestionAnswerByEmotionDTO {
     private List<QuestionAnswerDTO> answers;
-    private DetectionType emotion;
+    private String emotion;
 
-    public QuestionAnswerByEmotionDTO(List<QuestionAnswerDTO> result, DetectionType detectionType){
+    public QuestionAnswerByEmotionDTO(List<QuestionAnswerDTO> result, String detectionType){
         this.answers = result;
         this.emotion = detectionType;
 //        this.answers.add(resultSad);
