@@ -1,0 +1,96 @@
+-----------  Angular ------------------------------
+
+[00] „Angular“, https://angular.io/docs, preuzeto septembra 2020.
+
+----------------  rest -----------------------------
+
+[12] „REST“, https://www.mulesoft.com/resources/api/what-is-rest-api-
+design, preuzeto septembra 2020.
+
+-------------------- spring ----------------------------
+
+[11] „Spring“, https://docs.spring.io/spring/docs/4.0.x/spring-framework-
+reference/html/overview.html, preuzeto septembra 2020.
+[14] „Hibernate“, https://hibernate.org/, preuzeto septembra 2020.
+[15] „OpenJPA“, http://openjpa.apache.org/, preuzeto septembra 2020.
+[18] „Spring Boot“, https://spring.io/projects/spring-boot, preuzeto septembra
+2020.
+
+------------------------- http-----------------------------------------------
+
+[19] „HTTP“, https://www.w3schools.com/whatis/whatis_http.asp, preuzeto
+septembra 2020.
+
+https://www.rfc-editor.org/rfc/rfc9110.html
+
+------------------------------------------------------------------------------
+
+[24] Medić, M., Preradov, K., Zarić, M., Sladić, G., Nikolić, S., 2019. Calculation
+of Insurance Policy Prices Using Rules-based Systems, in: Proceedings of
+the 9th International Conference on Information Society and Technology.
+Society for Information Systems and Computer Networks, Kopaonik
+mountain resort, Republic of Serbia, pp. 187–191.
+
+
+------------------------- drools, rete, ulancavanje --------------------------
+
+[00] „Drools“, https://docs.jboss.org/drools/release/7.35.0.Final/drools-
+docs/html_single/, preuzeto septembra 2020.
+
+[25] „RETE algoritam“, http://www.jbug.jp/trans/jboss-
+rules3.0.2/ja/html/ch01s04.html, preuzeto septembra 2020.
+
+[26] „Ulančavanje“, https://www.javatpoint.com/forward-chaining-and-
+backward-chaining-in-ai, preuzeto septembra 2020.
+
+[27] „Knowledge is everything“, https://www.kiegroup.org/, preuzeto
+septembra 2020.
+
+[28] „Drools Spring integracija“, https://www.baeldung.com/drools-spring-
+integration, preuzeto septembra 2020.
+
+--------------- dijagrami ----------------------
+
+[29] „Dijagram slučajeva korišćenja“, https://www.uml-diagrams.org/use-case-
+diagrams.html, preuzeto septembra 2020.
+
+[30] „Fitbit“, https://www.fitbit.com/global/us/home, preuzeto septembra
+2020.
+
+[31] „Dijagram klasa“, https://www.uml-diagrams.org/class-diagrams-
+overview.html, preuzeto septembra 2020.
+
+[32] „Dijagram sekvenci“, https://www.uml-diagrams.org/sequence-
+diagrams.html, preuzeto septembra 2020.
+
+----------------- maven --------------
+
+[33] „Maven“, https://maven.apache.org/, preuzeto septembra 2020.
+
+
+Mike Greenwell: Knowledge engineering for expert systems, 1988; 
+
+Morris Firebaugh:
+
+
+----------------------- ekspertski sistemi ---------------
+
+21 Jackson, P., 1999. Introduction to expert systems, 3rd ed. ed,
+International computer science series. Addison-Wesley, Harlow,
+England ; Reading, Mass.
+[22] C. Grosan and A. Abraham, 2011, Intelligent systems: a
+modern approach. Berlin: Springer.
+[23] Sasikumar M., Ramani S., Muthu Raman S., Anjaneyulu
+K.S.R., Chandrasekar R (2007). A practical introduction to rule
+based expert systems. Narosa Publishing House, New Delhi
+[24] How The Rete Algorithm Works,
+https://www.sparklinglogic.com/rete-algorithm-demystified-part-2/,
+preuzeto septembra 2020.
+
+
+--------------------------------------------------------------------------------MOJE REFERENCE  ----------------------------------------
+
+https://www.zdravlje.gov.rs/view_file.php?file_id=1199&cache=sr
+
+
+https://enastava.ftninformatika.com/courses/469  --- пигкут
